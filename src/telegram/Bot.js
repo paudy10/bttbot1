@@ -37,7 +37,7 @@ export function launchBot(token) {
 function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
   bot.start(async (ctx) => {
-    ctx.reply(`hi friend`);
+    ctx.reply(`hi ${ctx.update.message.from.first_name}`);
     console.log(ctx.update.message);
   });
 
