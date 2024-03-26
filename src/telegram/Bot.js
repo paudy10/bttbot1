@@ -37,9 +37,7 @@ export function launchBot(token) {
 function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
   bot.start(async (ctx) => {
-    ctx.reply(
-      'hi and welcome'
-    );
+    ctx.reply(`${ctx}`);
   });
 
   // Register a listener for the /help command, and reply with a message whenever it's used
