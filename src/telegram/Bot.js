@@ -41,17 +41,10 @@ function listenToCommands(bot) {
       reply_markup: {
         resize_keyboard: true,
         keyboard: [
-          [{ text: MAIN_BUTTONS_TEXT.WATCH }],
-          [{ text: MAIN_BUTTONS_TEXT.WATCH2 }, { text: MAIN_BUTTONS_TEXT.VIP }],
-          [
-            { text: MAIN_BUTTONS_TEXT.COMMENT },
-            { text: MAIN_BUTTONS_TEXT.CRYPTO },
-            { text: MAIN_BUTTONS_TEXT.ACCOUNT },
-          ],
-          [
-            { text: MAIN_BUTTONS_TEXT.CONTACT },
-            { text: MAIN_BUTTONS_TEXT.MEME },
-          ],
+          [{ text: " متن 1" }],
+          [{ text: " متن 2" }, { text: " متن 3" }],
+          [{ text: " متن 4" }, { text: " متن 5" }, { text: " متن 6 " }],
+          [{ text: " متن 7 " }, { text: " متن 8 " }],
         ],
       },
     };
