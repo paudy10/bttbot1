@@ -66,7 +66,8 @@ function listenToCommands(bot) {
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
   bot.hears("Account", async (ctx) => {
-    ctx.reply(`Name : ${ctx.update.message.from.first_name}
+    ctx.reply(`
+    Name : ${ctx.update.message.from.first_name}
     Username : ${ctx.update.message.from.username}
     Balance : 0 $
     `);
