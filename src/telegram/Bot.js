@@ -41,7 +41,7 @@ function listenToCommands(bot) {
       reply_markup: {
         resize_keyboard: true,
         keyboard: [
-          [{ text: " متن 1" }],
+          [{ text: " متن 1 " }],
           [{ text: " متن 2" }, { text: " متن 3" }],
           [{ text: " متن 4" }, { text: " متن 5" }, { text: " متن 6 " }],
           [{ text: " متن 7 " }, { text: " متن 8 " }],
@@ -66,8 +66,8 @@ function listenToCommands(bot) {
  */
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
-  bot.hears("hi", async (ctx) => {
-    ctx.reply("Hey Javad");
+  bot.hears(" متن 1 ", async (ctx) => {
+    ctx.reply("تست متن 1 ");
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
