@@ -48,7 +48,7 @@ function listenToCommands(bot) {
       },
     };
     ctx.reply(`Welcome To BTT Bot !`, mainButtons);
-    console.log(ctx.update.message);
+    // console.log(ctx.update.message);
   });
 
   // Register a listener for the /help command, and reply with a message whenever it's used
@@ -66,7 +66,10 @@ function listenToCommands(bot) {
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
   bot.hears("Account", async (ctx) => {
-    ctx.reply(`Name : ${ctx.update.message.from.first_name}`);
+    ctx.reply(`Name : ${ctx.update.message.from.first_name}
+    Username : ${ctx.update.message.from.username}
+    Balance : 0 $
+    `);
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
