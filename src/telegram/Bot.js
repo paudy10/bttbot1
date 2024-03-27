@@ -48,7 +48,7 @@ function listenToCommands(bot) {
       },
     };
     ctx.reply(`Welcome To BTT Bot !`, mainButtons);
-    // console.log(ctx.update.message);
+    console.log(ctx.update.message);
   });
 
   // Register a listener for the /help command, and reply with a message whenever it's used
@@ -73,15 +73,15 @@ function listenToMessages(bot) {
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
-  bot.on(message("text"), async (ctx) => {
-    ctx.reply("I don't understand text but I like stickers, send me some!");
-    ctx.reply("Or you can send me one of these commands \n/start\n/help");
-  });
+  // bot.on(message("text"), async (ctx) => {
+  //   ctx.reply("I don't understand text but I like stickers, send me some!");
+  //   ctx.reply("Or you can send me one of these commands \n/start\n/help");
+  // });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
-  bot.on(message("sticker"), async (ctx) => {
-    ctx.reply("I like your sticker! 🔥");
-  });
+  // bot.on(message("sticker"), async (ctx) => {
+  //   ctx.reply("I like your sticker! 🔥");
+  // });
 }
 
 /**
