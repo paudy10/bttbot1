@@ -41,14 +41,14 @@ function listenToCommands(bot) {
       reply_markup: {
         resize_keyboard: true,
         keyboard: [
-          [{ text: " متن 1 " }],
-          [{ text: " متن 2" }, { text: " متن 3" }],
-          [{ text: " متن 4" }, { text: " متن 5" }, { text: " متن 6 " }],
+          [{ text: "Account" }],
+          [{ text: "Referral" }, { text: "Clam Free BTT" }],
+          [{ text: "Withdraw" }, { text: "SOS" }, { text: "Deposit" }],
         ],
       },
     };
-    ctx.reply(`hi ${ctx.update.message.from.first_name}`, mainButtons);
-    // console.log(ctx.update.message);
+    ctx.reply(`Welcome To BTT Bot !`, mainButtons);
+    console.log(ctx.update.message);
   });
 
   // Register a listener for the /help command, and reply with a message whenever it's used
@@ -65,8 +65,8 @@ function listenToCommands(bot) {
  */
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
-  bot.hears(" متن 1 ", async (ctx) => {
-    ctx.reply("تست متن 1 ");
+  bot.hears("Account", async (ctx) => {
+    ctx.reply(`Name : ${ctx.update.message.from.first_name}`);
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
