@@ -69,6 +69,11 @@ function listenToMessages(bot) {
     ctx.reply(`Name : ${ctx.update.message.from.first_name} \nUsername : ${ctx.update.message.from.username} \nBalance : 0 $
     `);
   });
+  bot.hears("Referral", async (ctx) => {
+    ctx.reply(
+      `Your Referral Link : https://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`
+    );
+  });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
   // bot.on(message("text"), async (ctx) => {
