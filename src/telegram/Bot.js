@@ -37,8 +37,26 @@ export function launchBot(token) {
 function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
   bot.start(async (ctx) => {
-    ctx.reply(`hi ${ctx.update.message.from.first_name}`);
-    console.log(ctx.update.message);
+    const mainButtons = {
+      reply_markup: {
+        resize_keyboard: true,
+        keyboard: [
+          [{ text: MAIN_BUTTONS_TEXT.WATCH }],
+          [{ text: MAIN_BUTTONS_TEXT.WATCH2 }, { text: MAIN_BUTTONS_TEXT.VIP }],
+          [
+            { text: MAIN_BUTTONS_TEXT.COMMENT },
+            { text: MAIN_BUTTONS_TEXT.CRYPTO },
+            { text: MAIN_BUTTONS_TEXT.ACCOUNT },
+          ],
+          [
+            { text: MAIN_BUTTONS_TEXT.CONTACT },
+            { text: MAIN_BUTTONS_TEXT.MEME },
+          ],
+        ],
+      },
+    };
+    ctx.reply(`hi ${ctx.update.message.from.first_name}`, mainButtons);
+    // console.log(ctx.update.message);
   });
 
   // Register a listener for the /help command, and reply with a message whenever it's used
