@@ -44,7 +44,6 @@ function listenToCommands(bot) {
           [{ text: " متن 1 " }],
           [{ text: " متن 2" }, { text: " متن 3" }],
           [{ text: " متن 4" }, { text: " متن 5" }, { text: " متن 6 " }],
-          [{ text: " متن 7 " }, { text: " متن 8 " }],
         ],
       },
     };
