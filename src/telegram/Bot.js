@@ -4,6 +4,7 @@ import { message } from "telegraf/filters";
 import { ClaimCoin } from "./actions/claimCoin.js";
 import { SOS } from "./actions/sos.js";
 import User from "../model/user.js";
+import connectDB from "../database/index.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -42,14 +43,23 @@ function listenToCommands(bot) {
   bot.start(async (ctx, next) => {
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
+    let parent;
+    const getparent = () => {
+      if (ctx.message.text.split("/start ")[1]) {
+        return (parent = ctx.message.text.split("/start ")[1]);
+      } else {
+        return (parent = null);
+      }
+    };
     if (!user) {
+      getparent();
       user = new User({
         id: userTel.id,
         name: userTel.first_name,
         username: userTel.username,
         balance: 0,
         referral: 0,
-        parent: ctx.message.text.split("/start ")[1],
+        parent: parent,
       });
       user.save();
       ctx.reply("add User in db");
