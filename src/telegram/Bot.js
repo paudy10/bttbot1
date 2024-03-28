@@ -1,6 +1,8 @@
 // Use require instead of import because of the error "Cannot use import statement outside a module"
 import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
+import { ClaimCoin } from "./actions/claimCoin";
+import actionMiddleware from "./actionMiddleware";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -17,15 +19,13 @@ export function launchBot(token) {
   // Assign bot listeners
   listenToCommands(bot);
   listenToMessages(bot);
-
   listenToQueries(bot);
-
+  actionMiddleware();
   // Launch the bot
   bot.launch(() => console.log("bot launched"));
 
   // Handle stop events
   enableGracefulStop(bot);
-  console.log("enableGracefulStop");
 
   return bot;
 }
@@ -81,17 +81,7 @@ function listenToMessages(bot) {
     next();
   });
   bot.hears("Claim Free BTT", async (ctx, next) => {
-    ctx.replyWithPhoto(
-      { url: "https://picsum.photos/200/300/?random" },
-      {
-        caption: "Caption",
-        parse_mode: "Markdown",
-        ...Markup.inlineKeyboard([
-          Markup.button.callback("Plain", "plain"),
-          Markup.button.callback("Italic", "italic"),
-        ]),
-      }
-    );
+    ctx.reply("Claim BTT Coin", ClaimCoin("BTT"));
     next();
   });
 
