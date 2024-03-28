@@ -2,7 +2,6 @@
 import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
 import { ClaimCoin } from "./actions/claimCoin.js";
-import actionMiddleware from "./actionMiddleware/index.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -20,7 +19,6 @@ export function launchBot(token) {
   listenToCommands(bot);
   listenToMessages(bot);
   listenToQueries(bot);
-  actionMiddleware();
   // Launch the bot
   bot.launch(() => console.log("bot launched"));
 
