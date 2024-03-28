@@ -2,7 +2,7 @@
 import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
 import { ClaimCoin } from "./actions/claimCoin.js";
-import actionMiddleware from "./actionMiddleware.js";
+import actionMiddleware from "./actionMiddleware/index.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
