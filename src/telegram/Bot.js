@@ -63,7 +63,7 @@ function listenToCommands(bot) {
       user = new User({
         id: userTel.id,
         name: userTel.first_name,
-        username: userTel.username,
+        username: userTel.username ? userTel.username : "Unknown",
         balance: 0,
         parent: parent,
       });
