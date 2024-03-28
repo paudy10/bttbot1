@@ -16,12 +16,9 @@ export function launchBot(token) {
   const bot = new Telegraf(token);
   // Assign bot listeners
   listenToCommands(bot);
-  console.log("listen comment");
   listenToMessages(bot);
-  console.log("listen message");
 
   listenToQueries(bot);
-  console.log("listen query");
 
   // Launch the bot
   bot.launch(() => console.log("bot launched"));
@@ -47,7 +44,7 @@ function listenToCommands(bot) {
         resize_keyboard: true,
         keyboard: [
           [{ text: "Account" }],
-          [{ text: "Referral" }, { text: "Clam Free BTT" }],
+          [{ text: "Referral" }, { text: "Claim Free BTT" }],
           [{ text: "Withdraw" }, { text: "SOS" }, { text: "Deposit" }],
         ],
       },
@@ -81,6 +78,16 @@ function listenToMessages(bot) {
     ctx.reply(
       `Your Referral Link : https://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`
     );
+    next();
+  });
+  bot.hears("Claim Free BTT", async (ctx, next) => {
+    const keyboard = Markup.inlineKeyboard([
+      Markup.urlButton("❤️", "http://telegraf.js.org"),
+      Markup.callbackButton("Delete", "delete"),
+    ]);
+    ctx.copyMessage(ctx.chat.id, Extra.markup(keyboard));
+    bot.action("delete", ({ deleteMessage }) => deleteMessage());
+
     next();
   });
 
