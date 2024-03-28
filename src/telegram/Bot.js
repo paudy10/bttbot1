@@ -48,10 +48,6 @@ function listenToCommands(bot) {
       if (ctx.message.text.split("/start ")[1]) {
         let prnt = User.findOne({ id: ctx.message.text.split("/start ")[1] });
         if (prnt) {
-          await User.updateOne(
-            { id: ctx.message.text.split("/start ")[1] },
-            { referral: prnt.referral + 1 }
-          );
           ctx.telegram.sendMessage(
             ctx.message.text.split("/start ")[1],
             `you have a new referral`
