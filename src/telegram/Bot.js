@@ -44,17 +44,17 @@ function listenToCommands(bot) {
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
     let parent;
-    const getparent = () => {
+    const getparent = async () => {
       if (ctx.message.text.split("/start ")[1]) {
-        let user = User.findOne({ id: ctx.message.text.split("/start ")[1] });
-        if (user) {
-          User.updateOne(
+        let prnt = User.findOne({ id: ctx.message.text.split("/start ")[1] });
+        if (prnt) {
+          await User.updateOne(
             { id: ctx.message.text.split("/start ")[1] },
-            { referral: user.referral + 1 }
+            { referral: prnt.referral + 1 }
           );
           ctx.telegram.sendMessage(
             ctx.message.text.split("/start ")[1],
-            `your referral : ${user.referral + 1}`
+            `your referral : ${prnt.referral} ${prnt.referral + 1}`
           );
         }
         return (parent = ctx.message.text.split("/start ")[1]);
