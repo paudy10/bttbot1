@@ -1,8 +1,8 @@
 // Use require instead of import because of the error "Cannot use import statement outside a module"
 import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
-import { ClaimCoin } from "./actions/claimCoin";
-import actionMiddleware from "./actionMiddleware";
+import { ClaimCoin } from "./actions/claimCoin.js";
+import actionMiddleware from "./actionMiddleware.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
