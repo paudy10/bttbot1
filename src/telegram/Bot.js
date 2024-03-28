@@ -2,6 +2,7 @@
 import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
 import { ClaimCoin } from "./actions/claimCoin.js";
+import { SOS } from "./actions/sos.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -74,12 +75,16 @@ function listenToMessages(bot) {
   });
   bot.hears("Referral", async (ctx, next) => {
     ctx.reply(
-      `Your Referral Link : https://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`
+      `Your Referral Link : \nhttps://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`
     );
     next();
   });
   bot.hears("Claim Free BTT", async (ctx, next) => {
     ctx.reply("Claim BTT Coin", ClaimCoin("BTT"));
+    next();
+  });
+  bot.hears("SOS", async (ctx, next) => {
+    ctx.reply("ye matne englisi va tahesh id", SOS());
     next();
   });
 
