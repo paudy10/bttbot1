@@ -105,7 +105,12 @@ function listenToQueries(bot) {
   bot.on("callback_query", async (ctx, next) => {
     // Explicit usage
     await ctx.telegram.answerCbQuery(ctx.callbackQuery.id);
-
+    if (!ctx.update.callback_query) return next();
+    const callback_data = ctx.update.callback_query.data;
+    if (callback_data) {
+      ctx.reply(callback_data);
+      console.log(callback_data);
+    }
     // Using context shortcut
     await ctx.answerCbQuery();
     next();
