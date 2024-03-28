@@ -65,7 +65,6 @@ function listenToCommands(bot) {
         name: userTel.first_name,
         username: userTel.username,
         balance: 0,
-        referral: 0,
         parent: parent,
       });
       user.save();
@@ -106,9 +105,7 @@ function listenToMessages(bot) {
   bot.hears("Account", async (ctx, next) => {
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
-    let myref = await User.find({ parent: userTel.id });
-    console.log(myref);
-    ctx.reply(`Name : ${user.name} \nUsername : ${user.username} \nBalance : ${user.balance} $ \nReferral : ${user.referral}
+    ctx.reply(`Name : ${user.name} \nUsername : ${user.username} \nBalance : ${user.balance} $ \nReferral : ${myref.length}
     `);
     next();
   });
