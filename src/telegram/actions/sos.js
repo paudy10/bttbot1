@@ -5,8 +5,8 @@ export const SOS = () => {
       inline_keyboard: [
         [
           {
-            te: "Support",
-            url: `t.me/im_jude`,
+            text: "Support",
+            url: `t.me/im_jud`,
           },
         ],
       ],
