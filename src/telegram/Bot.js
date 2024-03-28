@@ -36,7 +36,7 @@ export function launchBot(token) {
  */
 function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
-  bot.start(async (ctx) => {
+  bot.start(async (ctx, next) => {
     const mainButtons = {
       reply_markup: {
         resize_keyboard: true,
@@ -49,11 +49,13 @@ function listenToCommands(bot) {
     };
     ctx.reply(`Welcome To BTT Bot !`, mainButtons);
     console.log(ctx.update.message);
+    next();
   });
 
   // Register a listener for the /help command, and reply with a message whenever it's used
-  bot.help(async (ctx) => {
+  bot.help(async (ctx, next) => {
     ctx.reply("Run the /start command to use our mini app");
+    next();
   });
 }
 
@@ -65,14 +67,16 @@ function listenToCommands(bot) {
  */
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
-  bot.hears("Account", async (ctx) => {
+  bot.hears("Account", async (ctx, next) => {
     ctx.reply(`Name : ${ctx.update.message.from.first_name} \nUsername : ${ctx.update.message.from.username} \nBalance : 0 $
     `);
+    next();
   });
-  bot.hears("Referral", async (ctx) => {
+  bot.hears("Referral", async (ctx, next) => {
     ctx.reply(
       `Your Referral Link : https://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`
     );
+    next();
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
@@ -94,21 +98,23 @@ function listenToMessages(bot) {
  *
  */
 function listenToQueries(bot) {
-  bot.on("callback_query", async (ctx) => {
+  bot.on("callback_query", async (ctx, next) => {
     // Explicit usage
     await ctx.telegram.answerCbQuery(ctx.callbackQuery.id);
 
     // Using context shortcut
     await ctx.answerCbQuery();
+    next();
   });
 
-  bot.on("inline_query", async (ctx) => {
+  bot.on("inline_query", async (ctx, next) => {
     const result = [];
     // Explicit usage
     await ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, result);
 
     // Using context shortcut
     await ctx.answerInlineQuery(result);
+    next();
   });
 }
 
