@@ -106,7 +106,7 @@ function listenToMessages(bot) {
   bot.hears("Account", async (ctx, next) => {
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
-    let myref = await User.findOne({ parent: userTel.id });
+    let myref = await User.find({ parent: userTel.id });
     console.log(myref);
     ctx.reply(`Name : ${user.name} \nUsername : ${user.username} \nBalance : ${user.balance} $ \nReferral : ${user.referral}
     `);
