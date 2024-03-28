@@ -46,6 +46,17 @@ function listenToCommands(bot) {
     let parent;
     const getparent = () => {
       if (ctx.message.text.split("/start ")[1]) {
+        let user = User.findOne({ id: ctx.message.text.split("/start ")[1] });
+        if (user) {
+          User.updateOne(
+            { id: ctx.message.text.split("/start ")[1] },
+            { referral: user.referral + 1 }
+          );
+          ctx.telegram.sendMessage(
+            ctx.message.text.split("/start ")[1],
+            `your referral : ${user.referral + 1}`
+          );
+        }
         return (parent = ctx.message.text.split("/start ")[1]);
       } else {
         return (parent = null);
@@ -62,9 +73,9 @@ function listenToCommands(bot) {
         parent: parent,
       });
       user.save();
-      ctx.reply("add User in db");
+      // ctx.reply("add User in db");
     } else {
-      ctx.reply("ghabln start zdi");
+      // ctx.reply("ghabln start zdi");
     }
     const mainButtons = {
       reply_markup: {
@@ -82,10 +93,10 @@ function listenToCommands(bot) {
   });
 
   // Register a listener for the /help command, and reply with a message whenever it's used
-  bot.help(async (ctx, next) => {
-    ctx.reply("Run the /start command to use our mini app");
-    next();
-  });
+  // bot.help(async (ctx, next) => {
+  //   ctx.reply("Run the /start command to use our mini app");
+  //   next();
+  // });
 }
 
 /**
