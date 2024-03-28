@@ -54,7 +54,7 @@ function listenToCommands(bot) {
           );
           ctx.telegram.sendMessage(
             ctx.message.text.split("/start ")[1],
-            `your referral : ${prnt.referral} ${prnt.referral + 1}`
+            `you have a new referral`
           );
         }
         return (parent = ctx.message.text.split("/start ")[1]);
@@ -110,6 +110,8 @@ function listenToMessages(bot) {
   bot.hears("Account", async (ctx, next) => {
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
+    let myref = await User.findOne({ parent: userTel.id });
+    console.log(myref);
     ctx.reply(`Name : ${user.name} \nUsername : ${user.username} \nBalance : ${user.balance} $ \nReferral : ${user.referral}
     `);
     next();
