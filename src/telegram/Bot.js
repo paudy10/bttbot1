@@ -24,7 +24,7 @@ export function launchBot(token) {
   console.log("listen query");
 
   // Launch the bot
-  bot.launch().then(() => console.log("bot launched"));
+  bot.launch(() => console.log("bot launched"));
 
   // Handle stop events
   enableGracefulStop(bot);
