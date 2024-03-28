@@ -3,6 +3,7 @@ import { Telegraf } from "telegraf";
 import { message } from "telegraf/filters";
 import { ClaimCoin } from "./actions/claimCoin.js";
 import { SOS } from "./actions/sos.js";
+import User from "../model/user.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -13,15 +14,16 @@ import { SOS } from "./actions/sos.js";
  * Make sure to save the token in a safe and secure place. Anyone with the access can control your bot.
  *
  */
-export function launchBot(token) {
+export async function launchBot(token) {
   // Create a bot using the token received from @BotFather(https://t.me/BotFather)
   const bot = new Telegraf(token);
   // Assign bot listeners
   listenToCommands(bot);
   listenToMessages(bot);
   listenToQueries(bot);
+  connectDB();
   // Launch the bot
-  bot.launch(() => console.log("bot launched"));
+  await bot.launch(() => console.log("bot launched"));
 
   // Handle stop events
   enableGracefulStop(bot);
@@ -38,6 +40,22 @@ export function launchBot(token) {
 function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
   bot.start(async (ctx, next) => {
+    const userTel = ctx.message.from;
+    let user = await User.findOne({ id: userTel.id });
+    if (!user) {
+      user = new User({
+        id: userTel.id,
+        name: userTel.first_name,
+        username: userTel.username,
+        balance: 0,
+        referral: 0,
+        parent: ctx.message.text.split("/start ")[1],
+      });
+      user.save();
+      ctx.reply("add User in db");
+    } else {
+      ctx.reply("ghabln start zdi");
+    }
     const mainButtons = {
       reply_markup: {
         resize_keyboard: true,
@@ -69,7 +87,9 @@ function listenToCommands(bot) {
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
   bot.hears("Account", async (ctx, next) => {
-    ctx.reply(`Name : ${ctx.update.message.from.first_name} \nUsername : ${ctx.update.message.from.username} \nBalance : 0 $
+    const userTel = ctx.message.from;
+    let user = await User.findOne({ id: userTel.id });
+    ctx.reply(`Name : ${user.name} \nUsername : ${user.username} \nBalance : ${user.balance} $ \nReferral : ${user.referral}
     `);
     next();
   });
