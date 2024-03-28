@@ -81,15 +81,17 @@ function listenToMessages(bot) {
     next();
   });
   bot.hears("Claim Free BTT", async (ctx, next) => {
-    ctx.copyMessage(
-      ctx.chat.id,
-      Markup.inlineKeyboard([
-        Markup.urlButton("❤️", "http://telegraf.js.org"),
-        Markup.callbackButton("Delete", "delete"),
-      ])
+    ctx.replyWithPhoto(
+      { url: "https://picsum.photos/200/300/?random" },
+      {
+        caption: "Caption",
+        parse_mode: "Markdown",
+        ...Markup.inlineKeyboard([
+          Markup.button.callback("Plain", "plain"),
+          Markup.button.callback("Italic", "italic"),
+        ]),
+      }
     );
-    bot.action("delete", ({ deleteMessage }) => deleteMessage());
-
     next();
   });
 
