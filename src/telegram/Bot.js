@@ -16,14 +16,19 @@ export function launchBot(token) {
   const bot = new Telegraf(token);
   // Assign bot listeners
   listenToCommands(bot);
+  console.log("listen comment");
   listenToMessages(bot);
+  console.log("listen message");
+
   listenToQueries(bot);
+  console.log("listen query");
 
   // Launch the bot
   bot.launch().then(() => console.log("bot launched"));
 
   // Handle stop events
   enableGracefulStop(bot);
+  console.log("enableGracefulStop");
 
   return bot;
 }
