@@ -81,11 +81,13 @@ function listenToMessages(bot) {
     next();
   });
   bot.hears("Claim Free BTT", async (ctx, next) => {
-    const keyboard = Markup.inlineKeyboard([
-      Markup.urlButton("❤️", "http://telegraf.js.org"),
-      Markup.callbackButton("Delete", "delete"),
-    ]);
-    ctx.copyMessage(ctx.chat.id, Extra.markup(keyboard));
+    ctx.copyMessage(
+      ctx.chat.id,
+      Markup.inlineKeyboard([
+        Markup.urlButton("❤️", "http://telegraf.js.org"),
+        Markup.callbackButton("Delete", "delete"),
+      ])
+    );
     bot.action("delete", ({ deleteMessage }) => deleteMessage());
 
     next();
