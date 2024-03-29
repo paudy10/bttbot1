@@ -43,7 +43,7 @@ function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
   bot.start(async (ctx, next) => {
     const chat = await ctx.telegram.getChatMember(
-      "@free_bttairdrop",
+      "https://t.me/+Ur2fhOdkrMYyMDQ8",
       ctx.message.from.id
     );
     const starter = async (ctx) => {
