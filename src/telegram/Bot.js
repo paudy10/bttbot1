@@ -102,6 +102,7 @@ function listenToCommands(bot) {
     ) {
       starter(ctx);
     } else {
+      console.log(chat);
       ctx.reply(
         `${ctx.update.message.from.first_name} ! Join this channel and press CHECK button`,
         JoinChannel()
