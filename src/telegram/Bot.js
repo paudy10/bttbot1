@@ -68,7 +68,10 @@ function listenToCommands(bot) {
         parent: parent,
       });
       user.save();
-      // ctx.reply("add User in db");
+      ctx.telegram.sendMessage(
+        "-1001318620720",
+        `Join New User ! \n${userTel.id} || ${userTel.name} || ${userTel?.username}`
+      );
     } else {
       // ctx.reply("ghabln start zdi");
     }
