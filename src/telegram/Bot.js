@@ -58,6 +58,8 @@ function listenToCommands(bot) {
               ctx.message.text.split("/start ")[1],
               `you have a new referral`
             );
+            prnt.balance = prnt.balance + 0.000005;
+            await prnt.save();
           }
           return (parent = ctx.message.text.split("/start ")[1]);
         } else {
@@ -102,7 +104,7 @@ function listenToCommands(bot) {
     ) {
       starter(ctx);
     } else {
-      console.log(chat);
+      // console.log(chat);
       ctx.reply(
         `${ctx.update.message.from.first_name} ! Join this channel and press CHECK button`,
         JoinChannel()
