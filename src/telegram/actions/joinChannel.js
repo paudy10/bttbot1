@@ -6,7 +6,7 @@ export const JoinChannel = () => {
         [
           {
             text: "BTT AirDrop",
-            url: `t.me/free_bttairdrop`,
+            url: `https://t.me/+Ur2fhOdkrMYyMDQ8`,
           },
           {
             text: "CHECK",
