@@ -68,9 +68,11 @@ function listenToCommands(bot) {
         parent: parent,
       });
       user.save();
+      // -1001318620720 chnl asli
+      // -1002067759534 gp asli
       ctx.telegram.sendMessage(
-        "-1001318620720",
-        `Join New User ! \n${userTel.id} || ${userTel.first_name} || ${userTel?.username}`
+        "-1002067759534",
+        `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username}`
       );
     } else {
       // ctx.reply("ghabln start zdi");
