@@ -73,7 +73,7 @@ function listenToCommands(bot) {
         }
       };
       if (!user) {
-        getparent();
+        await getparent();
         user = new User({
           id: userTel.id,
           name: userTel.first_name,
@@ -81,7 +81,7 @@ function listenToCommands(bot) {
           balance: 0,
           parent: parent,
         });
-        user.save();
+        await user.save();
         // -1001318620720 chnl asli
         // -1002067759534 gp asli
         ctx.telegram.sendMessage(
