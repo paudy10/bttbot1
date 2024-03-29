@@ -5,6 +5,7 @@ import { ClaimCoin } from "./actions/claimCoin.js";
 import { SOS } from "./actions/sos.js";
 import User from "../model/user.js";
 import connectDB from "../database/index.js";
+import { JoinChannel } from "./actions/joinChannel.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -41,53 +42,72 @@ export async function launchBot(token) {
 function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
   bot.start(async (ctx, next) => {
-    const userTel = ctx.message.from;
-    let user = await User.findOne({ id: userTel.id });
-    let parent;
-    const getparent = async () => {
-      if (ctx.message.text.split("/start ")[1]) {
-        let prnt = User.findOne({ id: ctx.message.text.split("/start ")[1] });
-        if (prnt) {
-          ctx.telegram.sendMessage(
-            ctx.message.text.split("/start ")[1],
-            `you have a new referral`
-          );
+    const chat = await ctx.telegram.getChatMember(
+      "@free_bttairdrop",
+      ctx.message.from.id
+    );
+    const starter = async (ctx) => {
+      const userTel = ctx.message.from;
+      let user = await User.findOne({ id: userTel.id });
+      let parent;
+      const getparent = async () => {
+        if (ctx.message.text.split("/start ")[1]) {
+          let prnt = User.findOne({ id: ctx.message.text.split("/start ")[1] });
+          if (prnt) {
+            ctx.telegram.sendMessage(
+              ctx.message.text.split("/start ")[1],
+              `you have a new referral`
+            );
+          }
+          return (parent = ctx.message.text.split("/start ")[1]);
+        } else {
+          return (parent = null);
         }
-        return (parent = ctx.message.text.split("/start ")[1]);
+      };
+      if (!user) {
+        getparent();
+        user = new User({
+          id: userTel.id,
+          name: userTel.first_name,
+          username: userTel.username ? userTel.username : "Unknown",
+          balance: 0,
+          parent: parent,
+        });
+        user.save();
+        // -1001318620720 chnl asli
+        // -1002067759534 gp asli
+        ctx.telegram.sendMessage(
+          "-1002067759534",
+          `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username}`
+        );
       } else {
-        return (parent = null);
+        // ctx.reply("ghabln start zdi");
       }
+      const mainButtons = {
+        reply_markup: {
+          resize_keyboard: true,
+          keyboard: [
+            [{ text: "Account" }],
+            [{ text: "Referral" }, { text: "Claim Free BTT" }],
+            [{ text: "Withdraw" }, { text: "SOS" }, { text: "Deposit" }],
+          ],
+        },
+      };
+      ctx.reply(`Welcome To BTT Bot !`, mainButtons);
     };
-    if (!user) {
-      getparent();
-      user = new User({
-        id: userTel.id,
-        name: userTel.first_name,
-        username: userTel.username ? userTel.username : "Unknown",
-        balance: 0,
-        parent: parent,
-      });
-      user.save();
-      // -1001318620720 chnl asli
-      // -1002067759534 gp asli
-      ctx.telegram.sendMessage(
-        "-1002067759534",
-        `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username}`
-      );
+    if (
+      chat.status == "member" ||
+      chat.status == "creator" ||
+      chat.status == "administrator"
+    ) {
+      starter(ctx);
     } else {
-      // ctx.reply("ghabln start zdi");
+      ctx.reply(
+        `${ctx.update.message.from.first_name} ! Join this channel and press CHECK button`,
+        JoinChannel()
+      );
     }
-    const mainButtons = {
-      reply_markup: {
-        resize_keyboard: true,
-        keyboard: [
-          [{ text: "Account" }],
-          [{ text: "Referral" }, { text: "Claim Free BTT" }],
-          [{ text: "Withdraw" }, { text: "SOS" }, { text: "Deposit" }],
-        ],
-      },
-    };
-    ctx.reply(`Welcome To BTT Bot !`, mainButtons);
+
     console.log(ctx.update.message);
     next();
   });
