@@ -56,15 +56,15 @@ function listenToCommands(bot) {
             id: ctx.message.text.split("/start ")[1],
           });
           let balance = prnt.balance + 0.0005;
+          let prnt1 = await User.findOneAndUpdate(
+            { id: ctx.message.text.split("/start ")[1] },
+            { balance },
+            { upsert: true }
+          );
           if (prnt) {
             ctx.telegram.sendMessage(
               ctx.message.text.split("/start ")[1],
               `you have a new referral`
-            );
-            let prnt1 = await User.findOneAndUpdate(
-              { id: ctx.message.text.split("/start ")[1] },
-              { balance },
-              { upsert: true }
             );
           }
           return (parent = ctx.message.text.split("/start ")[1]);
