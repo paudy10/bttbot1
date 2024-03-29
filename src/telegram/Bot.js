@@ -52,14 +52,20 @@ function listenToCommands(bot) {
       let parent;
       const getparent = async () => {
         if (ctx.message.text.split("/start ")[1]) {
-          let prnt = User.findOne({ id: ctx.message.text.split("/start ")[1] });
+          let prnt = await User.findOne({
+            id: ctx.message.text.split("/start ")[1],
+          });
+          let balance = prnt.balance + 0.0005;
           if (prnt) {
             ctx.telegram.sendMessage(
               ctx.message.text.split("/start ")[1],
               `you have a new referral`
             );
-            prnt.balance = prnt.balance + 0.000005;
-            await prnt.save();
+            let prnt1 = await User.findOneAndUpdate(
+              { id: ctx.message.text.split("/start ")[1] },
+              { balance },
+              { upsert: true }
+            );
           }
           return (parent = ctx.message.text.split("/start ")[1]);
         } else {
