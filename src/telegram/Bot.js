@@ -70,7 +70,7 @@ function listenToCommands(bot) {
       user.save();
       ctx.telegram.sendMessage(
         "-1001318620720",
-        `Join New User ! \n${userTel.id} || ${userTel.name} || ${userTel?.username}`
+        `Join New User ! \n${userTel.id} || ${userTel.first_name} || ${userTel?.username}`
       );
     } else {
       // ctx.reply("ghabln start zdi");
