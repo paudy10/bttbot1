@@ -43,7 +43,7 @@ function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
   bot.start(async (ctx, next) => {
     const chat = await ctx.telegram.getChatMember(
-      "-1001318620720",
+      process.env.CHANNEL_ID,
       ctx.message.from.id
     );
     const starter = async (ctx) => {
@@ -55,7 +55,7 @@ function listenToCommands(bot) {
           let prnt = await User.findOne({
             id: ctx.message.text.split("/start ")[1],
           });
-          let balance = prnt.balance + 0.0005;
+          let balance = prnt.balance + process.env.REF_PRIZE;
           let prnt1 = await User.findOneAndUpdate(
             { id: ctx.message.text.split("/start ")[1] },
             { balance },
@@ -82,10 +82,9 @@ function listenToCommands(bot) {
           parent: parent,
         });
         await user.save();
-        // -1001318620720 chnl asli
-        // -1002067759534 gp asli
+
         ctx.telegram.sendMessage(
-          "-1002067759534",
+          process.env.GP_ID,
           `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username}`
         );
       } else {
@@ -151,7 +150,7 @@ function listenToMessages(bot) {
     next();
   });
   bot.hears("Claim Free BTT", async (ctx, next) => {
-    ctx.reply("Claim BTT Coin", ClaimCoin("BTT"));
+    ctx.reply("Claim BTT Coin", ClaimCoin("BABYDOGE"));
     next();
   });
   bot.hears("SOS", async (ctx, next) => {
@@ -184,8 +183,20 @@ function listenToQueries(bot) {
     if (!ctx.update.callback_query) return next();
     const callback_data = ctx.update.callback_query.data;
     if (callback_data) {
-      ctx.reply(callback_data);
-      console.log(callback_data);
+      if (callback_data === "ClaimBABYDOGE") {
+        // let user = await User.findOne({
+        //   id: ,
+        // });
+        // let balance = user.balance + process.env.CLAIM_PRIZE;
+        // let prnt1 = await User.findOneAndUpdate(
+        //   { id:  },
+        //   { balance },
+        //   { upsert: true }
+        // );
+        console.log(ctx.message);
+      }
+      // ctx.reply(callback_data);
+      // console.log(callback_data);
     }
     // Using context shortcut
     await ctx.answerCbQuery();
