@@ -24,6 +24,8 @@ export async function launchBot(token) {
   listenToMessages(bot);
   listenToQueries(bot);
   connectDB();
+  bot.use(new LocalSession({ database: "session.json" }));
+
   // Launch the bot
   await bot.launch(() => console.log("bot launched"));
 
@@ -157,6 +159,25 @@ function listenToMessages(bot) {
   });
   bot.hears("Support", async (ctx, next) => {
     ctx.reply("ye matne englisi va tahesh id", SOS());
+    next();
+  });
+  bot.hears("Withdraw", async (ctx, next) => {
+    const userTel = ctx.message.from;
+    let user = await User.findOne({ id: userTel.id });
+    if (user.balance < process.env.MIN_WITHDRAW) {
+      ctx.reply(
+        `Your Balance : ${user.balance} \nMinimum BabyDoge to Withdraw : ${process.env.MIN_WITHDRAW} \nYou Can't Withdraw !`
+      );
+    } else {
+      ctx.session.state = "EnterWithdrawAmount";
+      ctx.reply(
+        `Your Balance : ${user.balance} \nMinimum BabyDoge to Withdraw : ${process.env.MIN_WITHDRAW} \nEnter the amount of BabyDoge you want to withdraw !`
+      );
+    }
+    if (ctx.session.state === "EnterWithdrawAmount") {
+      ctx.session.state = undefined;
+      ctx.reply(`your amount to withdraw : ${ctx.message.text}`);
+    }
     next();
   });
 
