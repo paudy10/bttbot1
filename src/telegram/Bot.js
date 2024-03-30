@@ -188,7 +188,8 @@ function listenToQueries(bot) {
         let user = await User.findOne({
           id: id,
         });
-        let balance = user.balance + process.env.CLAIM_PRIZE;
+        let claimprize = process.env.CLAIM_PRIZE + 0;
+        let balance = user.balance + claimprize;
         let UpdUser = await User.findOneAndUpdate(
           { id: id },
           { balance },
@@ -198,8 +199,8 @@ function listenToQueries(bot) {
       let messageID = ctx.update.callback_query.message.message_id;
       let chatID = ctx.update.callback_query.message.chat.id;
       ctx.telegram.deleteMessage(chatID, messageID);
-      // ctx.reply(callback_data);
-      console.log(ctx.update.callback_query.message.chat);
+      ctx.reply(`Collect ${process.env.CLAIM_PRIZE} BABY DOGE !`);
+      // console.log(ctx.update.callback_query.message.chat);
     }
     // Using context shortcut
     await ctx.answerCbQuery();
