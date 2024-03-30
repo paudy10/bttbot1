@@ -6,6 +6,7 @@ import { SOS } from "./actions/sos.js";
 import User from "../model/user.js";
 import connectDB from "../database/index.js";
 import { JoinChannel } from "./actions/joinChannel.js";
+import LocalSession from "telegraf-session-local";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
