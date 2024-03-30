@@ -7,6 +7,7 @@ import User from "../model/user.js";
 import connectDB from "../database/index.js";
 import { JoinChannel } from "./actions/joinChannel.js";
 import LocalSession from "telegraf-session-local";
+import session from "../middleware/session.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -22,6 +23,7 @@ export async function launchBot(token) {
   const bot = new Telegraf(token);
   // Assign bot listeners
   bot.use(new LocalSession({ database: "session.json" }).middleware());
+  bot.use(session);
   listenToCommands(bot);
   listenToMessages(bot);
   listenToQueries(bot);
@@ -174,13 +176,6 @@ function listenToMessages(bot) {
       ctx.reply(
         `Your Balance : ${user.balance} \nMinimum BabyDoge to Withdraw : ${process.env.MIN_WITHDRAW} \nEnter the amount of BabyDoge you want to withdraw !`
       );
-    }
-    if (ctx?.session?.state === "EnterWithdrawAmount") {
-      ctx.session.state = "Answer1";
-      if (ctx?.session?.state === "Answer1") {
-        ctx.session.state = undefined;
-        ctx.reply(`your amount to withdraw : ${ctx.message.text}`);
-      }
     }
     next();
   });
