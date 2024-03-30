@@ -5,12 +5,14 @@ export const JoinChannel = () => {
       inline_keyboard: [
         [
           {
-            text: "BTT AirDrop",
-            url: `https://t.me/+Ur2fhOdkrMYyMDQ8`,
+            text: "BABY DOGE AirDrop",
+            url: process.env.CHANNEL_LINK,
           },
+        ],
+        [
           {
             text: "CHECK",
-            url: `t.me/btt_bbot?start`,
+            url: process.env.STARTBOT,
           },
         ],
       ],
