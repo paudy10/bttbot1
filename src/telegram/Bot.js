@@ -50,11 +50,13 @@ function listenToCommands(bot) {
       const userTel = ctx.message.from;
       let user = await User.findOne({ id: userTel.id });
       let parent;
+      let parentUsername;
       const getparent = async () => {
         if (ctx.message.text.split("/start ")[1]) {
           let prnt = await User.findOne({
             id: ctx.message.text.split("/start ")[1],
           });
+          parentUsername = prnt.username ? prnt.username : prnt.name;
           let balance = prnt.balance + parseInt(process.env.REF_PRIZE);
           let prnt1 = await User.findOneAndUpdate(
             { id: ctx.message.text.split("/start ")[1] },
@@ -85,7 +87,7 @@ function listenToCommands(bot) {
 
         ctx.telegram.sendMessage(
           process.env.GP_ID,
-          `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username}`
+          `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username} \n Invited by : @${parentUsername}`
         );
       } else {
         // ctx.reply("ghabln start zdi");
