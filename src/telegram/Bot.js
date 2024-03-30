@@ -155,7 +155,7 @@ function listenToMessages(bot) {
     ctx.reply("Claim BTT Coin", ClaimCoin("BABYDOGE"));
     next();
   });
-  bot.hears("SOS", async (ctx, next) => {
+  bot.hears("Support", async (ctx, next) => {
     ctx.reply("ye matne englisi va tahesh id", SOS());
     next();
   });
