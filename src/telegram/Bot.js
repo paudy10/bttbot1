@@ -66,7 +66,7 @@ function listenToCommands(bot) {
           if (prnt) {
             ctx.telegram.sendMessage(
               ctx.message.text.split("/start ")[1],
-              `you have a new referral`
+              `you have a new referral : ${userTel.first_name}`
             );
           }
           return (parent = ctx.message.text.split("/start ")[1]);
@@ -87,7 +87,7 @@ function listenToCommands(bot) {
 
         ctx.telegram.sendMessage(
           process.env.GP_ID,
-          `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username} \n Invited by : @${parentUsername}`
+          `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username} \nInvited by : @${parentUsername}`
         );
       } else {
         // ctx.reply("ghabln start zdi");
@@ -98,7 +98,7 @@ function listenToCommands(bot) {
           keyboard: [
             [{ text: "Account" }],
             [{ text: "Referral" }, { text: "Claim Free BTT" }],
-            [{ text: "Withdraw" }, { text: "SOS" }, { text: "Deposit" }],
+            [{ text: "Withdraw" }, { text: "Support" }, { text: "Deposit" }],
           ],
         },
       };
