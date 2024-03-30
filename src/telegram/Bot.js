@@ -55,7 +55,7 @@ function listenToCommands(bot) {
           let prnt = await User.findOne({
             id: ctx.message.text.split("/start ")[1],
           });
-          let balance = prnt.balance + process.env.REF_PRIZE;
+          let balance = prnt.balance + parseInt(process.env.REF_PRIZE);
           let prnt1 = await User.findOneAndUpdate(
             { id: ctx.message.text.split("/start ")[1] },
             { balance },
@@ -188,8 +188,7 @@ function listenToQueries(bot) {
         let user = await User.findOne({
           id: id,
         });
-        let claimprize = process.env.CLAIM_PRIZE + 0;
-        let balance = user.balance + claimprize;
+        let balance = user.balance + parseInt(process.env.CLAIM_PRIZE);
         let UpdUser = await User.findOneAndUpdate(
           { id: id },
           { balance },
