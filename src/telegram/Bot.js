@@ -175,7 +175,7 @@ function listenToMessages(bot) {
         `Your Balance : ${user.balance} \nMinimum BabyDoge to Withdraw : ${process.env.MIN_WITHDRAW} \nEnter the amount of BabyDoge you want to withdraw !`
       );
     }
-    if (ctx.session.state === "EnterWithdrawAmount") {
+    if (ctx?.session?.state === "EnterWithdrawAmount") {
       ctx.session.state = undefined;
       ctx.reply(`your amount to withdraw : ${ctx.message.text}`);
     }
