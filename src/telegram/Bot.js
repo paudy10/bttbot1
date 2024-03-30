@@ -21,11 +21,11 @@ export async function launchBot(token) {
   // Create a bot using the token received from @BotFather(https://t.me/BotFather)
   const bot = new Telegraf(token);
   // Assign bot listeners
+  bot.use(new LocalSession({ database: "session.json" }).middleware());
   listenToCommands(bot);
   listenToMessages(bot);
   listenToQueries(bot);
   connectDB();
-  bot.use(new LocalSession({ database: "session.json" }).middleware());
 
   // Launch the bot
   await bot.launch(() => console.log("bot launched"));
