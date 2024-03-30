@@ -195,7 +195,7 @@ function listenToQueries(bot) {
           { upsert: true }
         );
       }
-      let messageID = cts.update.callback_query.message.message_id;
+      let messageID = ctx.update.callback_query.message.message_id;
       let chatID = ctx.update.callback_query.message.chat.id;
       ctx.telegram.deleteMessage(chatID, messageID);
       // ctx.reply(callback_data);
