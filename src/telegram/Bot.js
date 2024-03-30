@@ -193,7 +193,7 @@ function listenToQueries(bot) {
         //   { balance },
         //   { upsert: true }
         // );
-        console.log(ctx.updates);
+        console.log(ctx.update);
       }
       // ctx.reply(callback_data);
       // console.log(callback_data);
