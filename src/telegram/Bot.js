@@ -7,7 +7,7 @@ import User from "../model/user.js";
 import connectDB from "../database/index.js";
 import { JoinChannel } from "./actions/joinChannel.js";
 import LocalSession from "telegraf-session-local";
-import session from "../middleware/session.js";
+import Session from "../middleware/session.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -23,7 +23,7 @@ export async function launchBot(token) {
   const bot = new Telegraf(token);
   // Assign bot listeners
   bot.use(new LocalSession({ database: "session.json" }).middleware());
-  bot.use(session);
+  bot.use(Session);
   listenToCommands(bot);
   listenToMessages(bot);
   listenToQueries(bot);

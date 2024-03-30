@@ -1,4 +1,4 @@
-export default SessionMiddleware = (ctx, next) => {
+export default function Session(ctx, next) {
   if (!ctx.session.state) return next();
   const state = ctx.session.state;
 
@@ -6,4 +6,4 @@ export default SessionMiddleware = (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply(`your amount to withdraw : ${ctx.message.text}`);
   }
-};
+}
