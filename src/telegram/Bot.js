@@ -184,19 +184,22 @@ function listenToQueries(bot) {
     const callback_data = ctx.update.callback_query.data;
     if (callback_data) {
       if (callback_data === "ClaimBABYDOGE") {
-        // let user = await User.findOne({
-        //   id: ,
-        // });
-        // let balance = user.balance + process.env.CLAIM_PRIZE;
-        // let prnt1 = await User.findOneAndUpdate(
-        //   { id:  },
-        //   { balance },
-        //   { upsert: true }
-        // );
-        console.log(ctx.update);
+        let id = ctx.update.callback_query.from.id;
+        let user = await User.findOne({
+          id: id,
+        });
+        let balance = user.balance + process.env.CLAIM_PRIZE;
+        let UpdUser = await User.findOneAndUpdate(
+          { id: id },
+          { balance },
+          { upsert: true }
+        );
       }
+      let messageID = cts.update.callback_query.message.message_id;
+      let chatID = ctx.update.callback_query.message.chat.id;
+      ctx.telegram.deleteMessage(chatID, messageID);
       // ctx.reply(callback_data);
-      // console.log(callback_data);
+      console.log(ctx.update.callback_query.message.chat);
     }
     // Using context shortcut
     await ctx.answerCbQuery();
