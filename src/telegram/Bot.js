@@ -25,7 +25,7 @@ export async function launchBot(token) {
   listenToMessages(bot);
   listenToQueries(bot);
   connectDB();
-  bot.use(new LocalSession({ database: "session.json" }));
+  bot.use(new LocalSession({ database: "session.json" }).middleware());
 
   // Launch the bot
   await bot.launch(() => console.log("bot launched"));
