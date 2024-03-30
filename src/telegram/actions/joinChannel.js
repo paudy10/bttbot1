@@ -1,4 +1,4 @@
-export const JoinChannel = () => {
+export const JoinChannel = (id) => {
   return {
     reply_markup: {
       resize_keyboard: true,
@@ -12,7 +12,7 @@ export const JoinChannel = () => {
         [
           {
             text: "CHECK",
-            url: process.env.STARTBOT,
+            url: `${process.env.STARTBOT}${id ? `=${id}` : ""}`,
           },
         ],
       ],

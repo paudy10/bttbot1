@@ -114,7 +114,7 @@ function listenToCommands(bot) {
       // console.log(chat);
       ctx.reply(
         `${ctx.update.message.from.first_name} ! Join this channel and press CHECK button`,
-        JoinChannel()
+        JoinChannel(ctx.message.text.split("/start ")[1])
       );
     }
 
@@ -196,11 +196,12 @@ function listenToQueries(bot) {
           { balance },
           { upsert: true }
         );
+        let messageID = ctx.update.callback_query.message.message_id;
+        let chatID = ctx.update.callback_query.message.chat.id;
+        ctx.telegram.deleteMessage(chatID, messageID);
+        ctx.reply(`Collect ${process.env.CLAIM_PRIZE} BABY DOGE !`);
       }
-      let messageID = ctx.update.callback_query.message.message_id;
-      let chatID = ctx.update.callback_query.message.chat.id;
-      ctx.telegram.deleteMessage(chatID, messageID);
-      ctx.reply(`Collect ${process.env.CLAIM_PRIZE} BABY DOGE !`);
+
       // console.log(ctx.update.callback_query.message.chat);
     }
     // Using context shortcut
