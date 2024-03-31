@@ -222,7 +222,12 @@ function listenToQueries(bot) {
         ctx.reply(`Collect ${process.env.CLAIM_PRIZE} BABY DOGE !`);
       }
       if (callback_data === "ConfirmWithdraw") {
-        ctx.session.state = "ConfirmWithdraw";
+        ctx.session.state = undefined;
+        ctx.telegram.sendMessage(
+          process.env.GP_ID,
+          `New Withdraw ! \n Amount to withdraw : ${ctx.session.amount} \nWallet address : ${ctx.session.wallet}`
+        );
+        ctx.reply(`withdraw successfull !`);
       }
 
       // console.log(ctx.update.callback_query.message.chat);

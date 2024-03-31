@@ -19,12 +19,12 @@ export default function Session(ctx, next) {
       ConfirmWithdraw()
     );
   }
-  if (state === "ConfirmWithdraw") {
-    ctx.session.state = undefined;
-    ctx.telegram.sendMessage(
-      process.env.GP_ID,
-      `New Withdraw ! \n Amount to withdraw : ${ctx.session.amount} \nWallet address : ${ctx.session.wallet}`
-    );
-    ctx.reply(`withdraw successfull !`);
-  }
+  //   if (state === "ConfirmWithdraw") {
+  //     ctx.session.state = undefined;
+  //     ctx.telegram.sendMessage(
+  //       process.env.GP_ID,
+  //       `New Withdraw ! \n Amount to withdraw : ${ctx.session.amount} \nWallet address : ${ctx.session.wallet}`
+  //     );
+  //     ctx.reply(`withdraw successfull !`);
+  //   }
 }
