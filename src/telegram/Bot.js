@@ -225,9 +225,19 @@ function listenToQueries(bot) {
         ctx.session.state = undefined;
         ctx.telegram.sendMessage(
           process.env.GP_ID,
-          `New Withdraw ! \n Amount to withdraw : ${ctx.session.amount} \nWallet address : ${ctx.session.wallet}`
+          `New Withdraw ! \nAmount to withdraw : ${ctx.session.amount} \nWallet address : ${ctx.session.wallet}`
         );
         ctx.reply(`withdraw successfull !`);
+        let id = ctx.update.callback_query.from.id;
+        let user = await User.findOne({
+          id: id,
+        });
+        let balance = user.balance - ctx.session.amount;
+        let UpdUser = await User.findOneAndUpdate(
+          { id: id },
+          { balance },
+          { upsert: true }
+        );
       }
 
       // console.log(ctx.update.callback_query.message.chat);

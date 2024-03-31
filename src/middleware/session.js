@@ -6,11 +6,18 @@ export default function Session(ctx, next) {
   const state = ctx.session.state;
 
   if (state === "EnterWithdrawAmount") {
-    ctx.session.state = "EnterWallet";
-    ctx.session.amount = ctx.message.text;
-    ctx.reply(
-      `your amount to withdraw : ${ctx.session.amount} \nSend Your Wallet Address !`
-    );
+    ctx.session.amount = parseInt(ctx.message.text);
+    if (ctx.session.amount < process.env.MIN_WITHDRAW) {
+      ctx.reply(
+        `your amount : ${ctx.session.amount} \nminimum amount to withdraw : ${process.env.MIN_WITHDRAW}`
+      );
+      ctx.session.state = undefined;
+    } else {
+      ctx.session.state = "EnterWallet";
+      ctx.reply(
+        `your amount to withdraw : ${ctx.session.amount} \nSend Your Wallet Address !`
+      );
+    }
   }
   if (state === "EnterWallet") {
     ctx.session.state = undefined;
@@ -20,12 +27,4 @@ export default function Session(ctx, next) {
       ConfirmWithdraw()
     );
   }
-  //   if (state === "ConfirmWithdraw") {
-  //     ctx.session.state = undefined;
-  //     ctx.telegram.sendMessage(
-  //       process.env.GP_ID,
-  //       `New Withdraw ! \n Amount to withdraw : ${ctx.session.amount} \nWallet address : ${ctx.session.wallet}`
-  //     );
-  //     ctx.reply(`withdraw successfull !`);
-  //   }
 }
