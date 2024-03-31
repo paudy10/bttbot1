@@ -221,6 +221,9 @@ function listenToQueries(bot) {
         ctx.telegram.deleteMessage(chatID, messageID);
         ctx.reply(`Collect ${process.env.CLAIM_PRIZE} BABY DOGE !`);
       }
+      if (callback_data === "ConfirmWithdraw") {
+        ctx.session.state = "ConfirmWithdraw";
+      }
 
       // console.log(ctx.update.callback_query.message.chat);
     }
