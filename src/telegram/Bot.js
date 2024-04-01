@@ -4,6 +4,7 @@ import { message } from "telegraf/filters";
 import { ClaimCoin } from "./actions/claimCoin.js";
 import { SOS } from "./actions/sos.js";
 import User from "../model/user.js";
+import Withdraw from "../model/withdraw.js";
 import connectDB from "../database/index.js";
 import { JoinChannel } from "./actions/joinChannel.js";
 import LocalSession from "telegraf-session-local";
@@ -81,14 +82,14 @@ function listenToCommands(bot) {
       };
       if (!user) {
         await getparent();
-        user = new User({
+        let user1 = new User({
           id: userTel.id,
           name: userTel.first_name,
           username: userTel.username ? userTel.username : "Unknown",
           balance: 0,
           parent: parent,
         });
-        await user.save();
+        await user1.save();
 
         ctx.telegram.sendMessage(
           process.env.GP_ID,
@@ -232,6 +233,14 @@ function listenToQueries(bot) {
           } || UserName : @${ctx.session?.username || "UNknown"}
           `
         );
+        let withdraw = new Withdraw({
+          userid: ctx.session?.userid,
+          username: ctx.session?.username || "UNknown",
+          amount: ctx.session?.amount,
+          wallet: ctx.session?.wallet,
+          date: new Date(),
+        });
+        await withdraw.save();
         ctx.reply(`withdraw successfull !`);
         let id = ctx.update.callback_query.from.id;
         let user = await User.findOne({
