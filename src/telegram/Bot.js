@@ -144,6 +144,7 @@ function listenToCommands(bot) {
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
   bot.hears("Account", async (ctx, next) => {
+    ctx.session.state = undefined;
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
     let myref = await User.find({ parent: userTel.id });
@@ -152,16 +153,19 @@ function listenToMessages(bot) {
     next();
   });
   bot.hears("Referral", async (ctx, next) => {
+    ctx.session.state = undefined;
     ctx.reply(
       `Your Referral Link : \nhttps://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`
     );
     next();
   });
   bot.hears("Claim Free BTT", async (ctx, next) => {
+    ctx.session.state = undefined;
     ctx.reply("Claim BTT Coin", ClaimCoin("BABYDOGE"));
     next();
   });
   bot.hears("Support", async (ctx, next) => {
+    ctx.session.state = undefined;
     ctx.reply("ye matne englisi va tahesh id", SOS());
     next();
   });

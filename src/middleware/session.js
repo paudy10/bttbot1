@@ -32,7 +32,7 @@ export default function Session(ctx, next) {
     ctx.session.duserid = ctx.message.from.id;
     ctx.session.state = undefined;
     ctx.reply(
-      `your amount to Deposit : ${ctx.session.Damount} \nYour Transaction HASH : \n${ctx.session.hash} \nadmin barresi mikone bade tayid be balance ezafe mishe !`
+      `Pending... \nyour amount to Deposit : ${ctx.session.Damount} \nYour Transaction HASH : \n${ctx.session.hash} \nadmin barresi mikone bade tayid be balance ezafe mishe !`
     );
     ctx.telegram.sendMessage(
       process.env.GP_ID,
