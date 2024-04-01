@@ -180,6 +180,13 @@ function listenToMessages(bot) {
     }
     next();
   });
+  bot.hears("Deposit", async (ctx, next) => {
+    ctx.session.state = "EnterDepositAmount";
+    ctx.reply(
+      `matne englisi tozihate deposit \nEnter the amount of BabyDoge you want to Deposit !`
+    );
+    next();
+  });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
   // bot.on(message("text"), async (ctx) => {
