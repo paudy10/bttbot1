@@ -193,7 +193,11 @@ function listenToMessages(bot) {
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
-  bot.on(message("text"), async (ctx) => {
+if (ctx.message.text.match("/senddm")) {
+    //   const id = ctx.message.text.split("/senddm ")[1].split(" matn:")[0];
+    //   const text = ctx.message.text.split("matn:")[1];
+    //   ctx.telegram.sendMessage(id, `${text}`, { parse_mode: "html" });
+    // }  bot.on(message("text"), async (ctx) => {
     if (ctx.message.text.match("/alluser")) {
       const alluser = await User.find();
       ctx.reply(
@@ -227,11 +231,7 @@ function listenToMessages(bot) {
         );
       }
     }
-    if (ctx.message.text.match("/senddm")) {
-      const id = ctx.message.text.split("/senddm ")[1].split(" matn:")[0];
-      const text = ctx.message.text.split("matn:")[1];
-      ctx.telegram.sendMessage(id, `${text}`, { parse_mode: "html" });
-    }
+    // 
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
