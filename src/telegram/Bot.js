@@ -194,10 +194,14 @@ function listenToMessages(bot) {
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
   bot.on(message("text"), async (ctx) => {
-    if (ctx.message.text.match("javad"))
-      ctx.reply(`${ctx.message.text} 
-    ${ctx.message.chat.id}
-    ${ctx.message.from.first_name}    `);
+    if (ctx.message.text.match("/alluser")) {
+      const alluser = await User.find();
+      ctx.reply(
+        `${alluser.map((user, index) => {
+          index + 1 || user.id || user.name || user?.username;
+        })}`
+      );
+    }
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
