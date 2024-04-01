@@ -193,10 +193,12 @@ function listenToMessages(bot) {
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
-  // bot.on(message("text"), async (ctx) => {
-  //   ctx.reply("I don't understand text but I like stickers, send me some!");
-  //   ctx.reply("Or you can send me one of these commands \n/start\n/help");
-  // });
+  bot.on(message("text"), async (ctx) => {
+    if (ctx.message.text.match("javad"))
+      ctx.reply(`${ctx.message.text} 
+    ${ctx.message.chat.id}
+    ${ctx.message.from.first_name}    `);
+  });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
   // bot.on(message("sticker"), async (ctx) => {
