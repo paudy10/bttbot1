@@ -226,14 +226,13 @@ function listenToQueries(bot) {
         ctx.telegram.sendMessage(
           process.env.GP_ID,
           `New Withdraw ! 
-          \n----------
-          \nAmount to withdraw : ${ctx.session.amount} 
-          \nWallet address : ${ctx.session.wallet}
-          \n----------
-          \nUser ID : ${
-            ctx.update.callback_query.message.from.id
-          } || UserName : @${
-            ctx.update.callback_query.message.from?.username || "UNknown"
+          ----------
+          Amount to withdraw : ${ctx.session.amount} \nWallet address : ${
+            ctx.session.wallet
+          } 
+          ----------
+          User ID : ${ctx.session.userid} || UserName : @${
+            ctx.session?.username || "UNknown"
           }
           `
         );

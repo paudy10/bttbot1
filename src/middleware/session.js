@@ -22,6 +22,8 @@ export default function Session(ctx, next) {
   if (state === "EnterWallet") {
     ctx.session.state = undefined;
     ctx.session.wallet = ctx.message.text;
+    ctx.session.username = ctx.message.from?.username;
+    ctx.session.userid = ctx.message.from.id;
     ctx.reply(
       `your amount to withdraw : ${ctx.session.amount} \nyour wallet address : ${ctx.session.wallet} \nPress Confirm To withraw !`,
       ConfirmWithdraw()
