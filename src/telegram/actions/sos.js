@@ -6,7 +6,7 @@ export const SOS = () => {
         [
           {
             text: "Support",
-            url: `t.me/im_jud`,
+            url: process.env.SUPPORTER,
           },
         ],
       ],
