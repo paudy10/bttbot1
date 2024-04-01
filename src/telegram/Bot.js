@@ -225,7 +225,17 @@ function listenToQueries(bot) {
         ctx.session.state = undefined;
         ctx.telegram.sendMessage(
           process.env.GP_ID,
-          `New Withdraw ! \nAmount to withdraw : ${ctx.session.amount} \nWallet address : ${ctx.session.wallet}`
+          `New Withdraw ! 
+          \n----------
+          \nAmount to withdraw : ${ctx.session.amount} 
+          \nWallet address : ${ctx.session.wallet}
+          \n----------
+          \nUser ID : ${
+            ctx.update.callback_query.message.from.id
+          } || UserName : @${
+            ctx.update.callback_query.message.from?.username || "UNknown"
+          }
+          `
         );
         ctx.reply(`withdraw successfull !`);
         let id = ctx.update.callback_query.from.id;
