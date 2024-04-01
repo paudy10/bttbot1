@@ -230,7 +230,7 @@ function listenToMessages(bot) {
     if (ctx.message.text.match("/senddm")) {
       const id = ctx.message.text.split("/senddm ")[1].split(" matn:")[0];
       const text = ctx.message.text.split("matn:")[1];
-      ctx.telegram.sendMessage(id, `${text}`);
+      ctx.telegram.sendMessage(id, `${text}`, { parse_mode: "html" });
     }
   });
 
