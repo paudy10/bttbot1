@@ -207,6 +207,13 @@ function listenToMessages(bot) {
           .join("")}`
       );
     }
+    if (ctx.message.text.match("/user")) {
+      const id = ctx.message.text.split("/user ")[1];
+      const user = await User.findOne({ id });
+      ctx.reply(
+        `id : ${user.id} \nname : ${user.name} \nusername : ${user.username} \n balance : ${user.balance}`
+      );
+    }
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
