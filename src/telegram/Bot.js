@@ -210,9 +210,22 @@ function listenToMessages(bot) {
     if (ctx.message.text.match("/user")) {
       const id = ctx.message.text.split("/user ")[1];
       const user = await User.findOne({ id });
+      const t = await Withdraw.find({ userid: id });
       ctx.reply(
         `id : ${user.id} \nname : ${user.name} \nusername : @${user.username} \nbalance : ${user.balance}`
       );
+      if (t.length > 0) {
+        ctx.reply(
+          `withdraw request \n${t
+            .map(
+              (user, index) =>
+                `${index + 1}- ${user.userid}  |  @${user.username} \n${
+                  user.amount
+                } $ | ${user.wallet}  \n`
+            )
+            .join("")}`
+        );
+      }
     }
   });
 
