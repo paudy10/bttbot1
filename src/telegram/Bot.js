@@ -211,7 +211,7 @@ function listenToMessages(bot) {
       const id = ctx.message.text.split("/user ")[1];
       const user = await User.findOne({ id });
       ctx.reply(
-        `id : ${user.id} \nname : ${user.name} \nusername : ${user.username} \n balance : ${user.balance}`
+        `id : ${user.id} \nname : ${user.name} \nusername : @${user.username} \nbalance : ${user.balance}`
       );
     }
   });
