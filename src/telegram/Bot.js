@@ -197,9 +197,13 @@ function listenToMessages(bot) {
     if (ctx.message.text.match("/alluser")) {
       const alluser = await User.find();
       ctx.reply(
-        `${alluser.map((user, index) => {
-          index + 1 || user.id || user.name || user?.username;
-        })}`
+        `لیست کاربران\n
+     ${alluser
+       .map(
+         (user, index) => `${index + 1}- ${user.id}  |  @${user.username} \n`
+       )
+       .join("")}
+    `
       );
     }
   });
