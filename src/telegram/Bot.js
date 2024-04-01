@@ -199,7 +199,10 @@ function listenToMessages(bot) {
       ctx.reply(
         `لیست کاربران\n${alluser
           .map(
-            (user, index) => `${index + 1}- ${user.id}  |  @${user.username} \n`
+            (user, index) =>
+              `${index + 1}- ${user.id}  |  @${user.username} | ${
+                user.balance
+              } $  \n`
           )
           .join("")}`
       );
