@@ -152,7 +152,7 @@ function listenToMessages(bot) {
     let user = await User.findOne({ id: userTel.id });
     let myref = await User.find({ parent: userTel.id });
     ctx.reply(
-      `Name : <b>${user.name}</b> \nUsername : <b>${user.username}</b> \nBalance : <b>${user.balance}</b> $ \nReferral : <b>${myref.length}<b/>
+      `Name : <b>${user.name}</b> \nUsername : <b>${user.username}</b> \nBalance : <b>${user.balance}</b> $ \nReferral : <b>${myref.length}</b>
     `,
       { parse_mode: "html" }
     );
