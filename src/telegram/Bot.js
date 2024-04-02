@@ -72,7 +72,7 @@ function listenToCommands(bot) {
           if (prnt) {
             ctx.telegram.sendMessage(
               ctx.message.text.split("/start ")[1],
-              `you have a new referral : ${userTel.first_name}`
+              `You Have a New Referral : ${userTel.first_name}`
             );
           }
           return (parent = ctx.message.text.split("/start ")[1]);
@@ -102,13 +102,17 @@ function listenToCommands(bot) {
         reply_markup: {
           resize_keyboard: true,
           keyboard: [
-            [{ text: "Account" }],
-            [{ text: "Referral" }, { text: "Claim Free BTT" }],
-            [{ text: "Withdraw" }, { text: "Support" }, { text: "Deposit" }],
+            [{ text: "Account | 📋" }],
+            [{ text: "Referral | 👥" }, { text: "Claim Free BTT | 💰" }],
+            [
+              { text: "Withdraw | 💵" },
+              { text: "Support | ☎" },
+              { text: "Deposit | 💸" },
+            ],
           ],
         },
       };
-      ctx.reply(`Welcome To BTT Bot !`, mainButtons);
+      ctx.reply(`Welcome To BTT Bot ! 🔥`, mainButtons);
     };
     if (
       chat.status == "member" ||
@@ -119,7 +123,7 @@ function listenToCommands(bot) {
     } else {
       // console.log(chat);
       ctx.reply(
-        `${ctx.update.message.from.first_name} ! Join this channel and press CHECK button`,
+        `${ctx.update.message.from.first_name} ! Join This Channel And Press CHECK Button ✨`,
         JoinChannel(ctx.message.text.split("/start ")[1])
       );
     }
@@ -142,33 +146,36 @@ function listenToCommands(bot) {
  */
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
-  bot.hears("Account", async (ctx, next) => {
+  bot.hears("Account | 📋", async (ctx, next) => {
     ctx.session.state = undefined;
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
     let myref = await User.find({ parent: userTel.id });
-    ctx.reply(`Name : ${user.name} \nUsername : ${user.username} \nBalance : ${user.balance} $ \nReferral : ${myref.length}
-    `);
+    ctx.reply(
+      `Name : <b>${user.name}</b> \nUsername : <b>${user.username}</b> \nBalance : <b>${user.balance}</b> $ \nReferral : <b>${myref.length}<b/>
+    `,
+      { parse_mode: "html" }
+    );
     next();
   });
-  bot.hears("Referral", async (ctx, next) => {
+  bot.hears("Referral | 👥", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply(
       `Your Referral Link : \nhttps://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`
     );
     next();
   });
-  bot.hears("Claim Free BTT", async (ctx, next) => {
+  bot.hears("Claim Free BTT | 💰", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply("Claim BTT Coin", ClaimCoin("BABYDOGE"));
     next();
   });
-  bot.hears("Support", async (ctx, next) => {
+  bot.hears("Support | ☎", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply("ye matne englisi va tahesh id", SOS());
     next();
   });
-  bot.hears("Withdraw", async (ctx, next) => {
+  bot.hears("Withdraw | 💵", async (ctx, next) => {
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
     if (user.balance < process.env.MIN_WITHDRAW) {
@@ -183,7 +190,7 @@ function listenToMessages(bot) {
     }
     next();
   });
-  bot.hears("Deposit", async (ctx, next) => {
+  bot.hears("Deposit | 💸", async (ctx, next) => {
     ctx.session.state = "EnterDepositAmount";
     ctx.reply(
       `matne englisi tozihate deposit \nEnter the amount of BabyDoge you want to Deposit !`
@@ -193,8 +200,6 @@ function listenToMessages(bot) {
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
   bot.on(message("text"), async (ctx) => {
-    console.log(ctx.message.chat.id);
-    console.log(process.env.GP_ID);
     if (parseInt(ctx.message.chat.id) === parseInt(process.env.GP_ID)) {
       if (ctx.message.text.match("/alluser")) {
         const alluser = await User.find();
