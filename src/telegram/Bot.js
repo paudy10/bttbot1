@@ -232,6 +232,11 @@ function listenToMessages(bot) {
       const text = ctx.message.text.split("matn:")[1];
       ctx.telegram.sendMessage(id, `${text}`, { parse_mode: "html" });
     }
+    if (ctx.message.text.match("/sendtoall")) {
+      const alluser = await User.find();
+      const text = ctx.message.text.split("matn:")[1];
+      ctx.telegram.sendMessage(alluser.map((user) => user.id).join(""));
+    }
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
