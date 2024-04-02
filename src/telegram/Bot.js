@@ -161,7 +161,8 @@ function listenToMessages(bot) {
   bot.hears("Referral | 👥", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply(
-      `Your Referral Link : \nhttps://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`
+      `<b>👥 | Your Referral Link</b> : \nhttps://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`,
+      { parse_mode: "html" }
     );
     next();
   });
@@ -172,7 +173,11 @@ function listenToMessages(bot) {
   });
   bot.hears("Support | ☎", async (ctx, next) => {
     ctx.session.state = undefined;
-    ctx.reply("ye matne englisi va tahesh id", SOS());
+    ctx.reply(
+      ` <b>Hi ${ctx.message.from.first_name} 👋<b/> \nIf you are facing any issues related to this bots . \n We are here to help you ❤️.`,
+      { parse_mode: "html" },
+      SOS()
+    );
     next();
   });
   bot.hears("Withdraw | 💵", async (ctx, next) => {
