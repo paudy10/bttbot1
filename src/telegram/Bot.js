@@ -195,7 +195,7 @@ function listenToMessages(bot) {
   bot.on(message("text"), async (ctx) => {
     console.log(ctx.message.chat.id);
     console.log(process.env.GP_ID);
-    if (ctx.message.chat.id === process.env.GP_ID) {
+    if (parseInt(ctx.message.chat.id) === parseInt(process.env.GP_ID)) {
       if (ctx.message.text.match("/alluser")) {
         const alluser = await User.find();
         ctx.reply(
