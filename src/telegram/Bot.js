@@ -102,13 +102,9 @@ function listenToCommands(bot) {
         reply_markup: {
           resize_keyboard: true,
           keyboard: [
-            [{ text: "Account | 📋" }],
-            [{ text: "Referral | 👥" }, { text: "Claim Free BTT | 💰" }],
-            [
-              { text: "Withdraw | 💵" },
-              { text: "Support | ☎" },
-              { text: "Deposit | 💸" },
-            ],
+            [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+            [{ text: "Withdraw | 💵" }, { text: "Claim Free BTT | 💰" }],
+            [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
           ],
         },
       };
@@ -174,7 +170,7 @@ function listenToMessages(bot) {
   bot.hears("Support | ☎", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply(
-      ` <b>Hi ${ctx.message.from.first_name} 👋</b> \nIf you are facing any issues related to this bots . \n We are here to help you ❤️.`,
+      ` <b>Hi ${ctx.message.from.first_name} 👋</b> \nIf you are facing any issues related to this bots . \nWe are here to help you ❤️.`,
       { parse_mode: "html" },
       SOS()
     );
