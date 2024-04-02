@@ -194,6 +194,7 @@ function listenToMessages(bot) {
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
   bot.on(message("text"), async (ctx) => {
+    console.log(ctx.message);
     if (ctx.message.chat.id === process.env.GP_ID) {
       if (ctx.message.text.match("/alluser")) {
         const alluser = await User.find();
