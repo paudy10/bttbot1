@@ -239,6 +239,16 @@ function listenToMessages(bot) {
         ctx.telegram.sendMessage(user.id, `${text}`, { parse_mode: "html" })
       );
     }
+    if (ctx.message.text.match("/balance")) {
+      const id = ctx.message.text.split("/balance ")[1].split(" new:")[0];
+      const balance = ctx.message.text.split("new:")[1];
+      let UpdUser = await User.findOneAndUpdate(
+        { id },
+        { balance },
+        { upsert: true }
+      );
+      ctx.reply(`${UpdUser.name} => balance : ${balance} $`);
+    }
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
