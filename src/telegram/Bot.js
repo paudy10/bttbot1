@@ -170,9 +170,8 @@ function listenToMessages(bot) {
   bot.hears("Support | ☎", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply(
-      `<b>Hi ${ctx.message.from.first_name} 👋</b> \nIf you are facing any issues related to this bots . \nWe are here to help you ❤️.`,
-      SOS(),
-      { parse_mode: "html" }
+      `Hi ${ctx.message.from.first_name} 👋 \nIf you are facing any issues related to this bots . \nWe are here to help you ❤️.`,
+      SOS()
     );
     next();
   });
