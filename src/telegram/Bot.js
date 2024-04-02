@@ -194,60 +194,62 @@ function listenToMessages(bot) {
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
   bot.on(message("text"), async (ctx) => {
-    if (ctx.message.text.match("/alluser")) {
-      const alluser = await User.find();
-      ctx.reply(
-        `User List \n${alluser
-          .map(
-            (user, index) =>
-              `${index + 1}- ${user.id}  |  @${user.username} | ${
-                user.balance
-              } $  \n`
-          )
-          .join("")}`
-      );
-    }
-    if (ctx.message.text.match("/user")) {
-      const id = ctx.message.text.split("/user ")[1];
-      const user = await User.findOne({ id });
-      const t = await Withdraw.find({ userid: id });
-      ctx.reply(
-        `id : ${user.id} \nname : ${user.name} \nusername : @${user.username} \nbalance : ${user.balance}`
-      );
-      if (t.length > 0) {
+    if (ctx.message.chat.id === process.env.GP_ID) {
+      if (ctx.message.text.match("/alluser")) {
+        const alluser = await User.find();
         ctx.reply(
-          `withdraw request \n${t
+          `User List \n${alluser
             .map(
               (user, index) =>
-                `${index + 1}- ${user.userid}  |  @${user.username} \n${
-                  user.amount
-                } $ | ${user.wallet}  \n`
+                `${index + 1}- ${user.id}  |  @${user.username} | ${
+                  user.balance
+                } $  \n`
             )
             .join("")}`
         );
       }
-    }
-    if (ctx.message.text.match("/senddm")) {
-      const id = ctx.message.text.split("/senddm ")[1].split(" text:")[0];
-      const text = ctx.message.text.split("text:")[1];
-      ctx.telegram.sendMessage(id, `${text}`, { parse_mode: "html" });
-    }
-    if (ctx.message.text.match("/sendtoall")) {
-      const alluser = await User.find();
-      const text = ctx.message.text.split("text:")[1];
-      alluser.map((user) =>
-        ctx.telegram.sendMessage(user.id, `${text}`, { parse_mode: "html" })
-      );
-    }
-    if (ctx.message.text.match("/balance")) {
-      const id = ctx.message.text.split("/balance ")[1].split(" new:")[0];
-      const balance = ctx.message.text.split("new:")[1];
-      let UpdUser = await User.findOneAndUpdate(
-        { id },
-        { balance },
-        { upsert: true }
-      );
-      ctx.reply(`${UpdUser.name} => balance : ${balance} $`);
+      if (ctx.message.text.match("/user")) {
+        const id = ctx.message.text.split("/user ")[1];
+        const user = await User.findOne({ id });
+        const t = await Withdraw.find({ userid: id });
+        ctx.reply(
+          `id : ${user.id} \nname : ${user.name} \nusername : @${user.username} \nbalance : ${user.balance}`
+        );
+        if (t.length > 0) {
+          ctx.reply(
+            `withdraw request \n${t
+              .map(
+                (user, index) =>
+                  `${index + 1}- ${user.userid}  |  @${user.username} \n${
+                    user.amount
+                  } $ | ${user.wallet}  \n`
+              )
+              .join("")}`
+          );
+        }
+      }
+      if (ctx.message.text.match("/senddm")) {
+        const id = ctx.message.text.split("/senddm ")[1].split(" text:")[0];
+        const text = ctx.message.text.split("text:")[1];
+        ctx.telegram.sendMessage(id, `${text}`, { parse_mode: "html" });
+      }
+      if (ctx.message.text.match("/sendtoall")) {
+        const alluser = await User.find();
+        const text = ctx.message.text.split("text:")[1];
+        alluser.map((user) =>
+          ctx.telegram.sendMessage(user.id, `${text}`, { parse_mode: "html" })
+        );
+      }
+      if (ctx.message.text.match("/balance")) {
+        const id = ctx.message.text.split("/balance ")[1].split(" new:")[0];
+        const balance = ctx.message.text.split("new:")[1];
+        let UpdUser = await User.findOneAndUpdate(
+          { id },
+          { balance },
+          { upsert: true }
+        );
+        ctx.reply(`${UpdUser.name} => balance : ${balance} $`);
+      }
     }
   });
 
