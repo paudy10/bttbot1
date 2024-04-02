@@ -235,7 +235,9 @@ function listenToMessages(bot) {
     if (ctx.message.text.match("/sendtoall")) {
       const alluser = await User.find();
       const text = ctx.message.text.split("text:")[1];
-      ctx.telegram.sendMessage(alluser.map((user) => user.id).join(""));
+      alluser.map((user) =>
+        ctx.telegram.sendMessage(user.id, `${text}`, { parse_mode: "html" })
+      );
     }
   });
 
