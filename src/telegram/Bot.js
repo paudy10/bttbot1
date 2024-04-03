@@ -186,7 +186,7 @@ function listenToMessages(bot) {
     } else {
       ctx.session.state = "EnterWithdrawAmount";
       ctx.reply(
-        `Your Balance : ${user.balance} \nMinimum BabyDoge to Withdraw : ${process.env.MIN_WITHDRAW} \nEnter the amount of BabyDoge you want to withdraw !`
+        `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum BabyDoge to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>✅ Enter the amount of BabyDoge you want to withdraw !</b>`
       );
     }
     next();
