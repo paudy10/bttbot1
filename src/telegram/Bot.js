@@ -180,7 +180,8 @@ function listenToMessages(bot) {
     let user = await User.findOne({ id: userTel.id });
     if (user.balance < process.env.MIN_WITHDRAW) {
       ctx.reply(
-        `Your Balance : ${user.balance} \nMinimum BabyDoge to Withdraw : ${process.env.MIN_WITHDRAW} \nYou Can't Withdraw !`
+        `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum BabyDoge to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
+        { parse_mode: "html" }
       );
     } else {
       ctx.session.state = "EnterWithdrawAmount";
