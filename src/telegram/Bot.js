@@ -29,7 +29,6 @@ export async function launchBot(token) {
   listenToMessages(bot);
   listenToQueries(bot);
   connectDB();
-
   // Launch the bot
   await bot.launch(() => console.log("bot launched"));
 

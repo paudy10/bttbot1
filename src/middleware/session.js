@@ -2,6 +2,7 @@ import { stat } from "fs";
 import { ConfirmWithdraw } from "../telegram/actions/confirmWithdraw.js";
 
 export default function Session(ctx, next) {
+  console.log(ctx.session);
   if (!ctx.session.state) return next();
   const state = ctx.session.state;
 
