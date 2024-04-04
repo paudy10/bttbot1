@@ -194,15 +194,11 @@ function listenToMessages(bot) {
     const mainButtons = {
       reply_markup: {
         resize_keyboard: true,
-        keyboard: [
-          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
-          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
-        ],
+        keyboard: [[{ text: "Cancel" }]],
       },
     };
     let user = await User.findOne({ id: userTel.id });
-    ctx.reply(mainButtons);
+    ctx.reply("Withdraw", mainButtons);
     if (user.balance < process.env.MIN_WITHDRAW) {
       ctx.reply(
         `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
@@ -222,11 +218,7 @@ function listenToMessages(bot) {
     const mainButtons = {
       reply_markup: {
         resize_keyboard: true,
-        keyboard: [
-          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
-          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
-        ],
+        keyboard: [[{ text: "Cancel" }]],
       },
     };
 
