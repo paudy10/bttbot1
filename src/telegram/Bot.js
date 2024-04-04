@@ -298,6 +298,9 @@ function listenToQueries(bot) {
       }
       if (callback_data === "ConfirmWithdraw") {
         ctx.session.state = undefined;
+        let messageID = ctx.update.callback_query.message.message_id;
+        let chatID = ctx.update.callback_query.message.chat.id;
+        ctx.telegram.deleteMessage(chatID, messageID);
         ctx.telegram.sendMessage(
           process.env.GP_ID,
           `New Withdraw ! \n----------\nAmount to withdraw : ${
