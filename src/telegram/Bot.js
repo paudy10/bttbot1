@@ -154,7 +154,7 @@ function listenToMessages(bot) {
       },
     };
     ctx.session.state = undefined;
-    ctx.reply("cancel action !", mainButtons);
+    ctx.reply("Main Menu !", mainButtons);
   });
   bot.hears("Account | 📋", async (ctx, next) => {
     ctx.session.state = undefined;

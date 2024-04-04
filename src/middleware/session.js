@@ -5,7 +5,18 @@ export default function Session(ctx, next) {
   if (!ctx.session.state) return next();
   const state = ctx.session.state;
   if (ctx.message.text === "Cancel") {
+    const mainButtons = {
+      reply_markup: {
+        resize_keyboard: true,
+        keyboard: [
+          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+        ],
+      },
+    };
     ctx.session.state = undefined;
+    ctx.reply("Main Menu !", mainButtons);
   }
   if (state === "EnterWithdrawAmount" && ctx.message.text !== "Cancel") {
     ctx.session.amount = parseInt(ctx.message.text);
