@@ -7,6 +7,9 @@ export default function Session(ctx, next) {
 
   if (state === "EnterWithdrawAmount") {
     ctx.session.amount = parseInt(ctx.message.text);
+    if (ctx.message.text === "Cancel") {
+      ctx.session.state = undefined;
+    }
     if (ctx.session.amount < process.env.MIN_WITHDRAW) {
       ctx.reply(
         `<b>💵 Your amount</b> : ${ctx.session.amount} \n<b>⚠ Minimum amount to withdraw</b> : ${process.env.MIN_WITHDRAW}`,
@@ -22,6 +25,9 @@ export default function Session(ctx, next) {
     }
   }
   if (state === "EnterDepositAmount") {
+    if (ctx.message.text === "Cancel") {
+      ctx.session.state = undefined;
+    }
     ctx.session.Damount = parseInt(ctx.message.text);
     ctx.session.state = "EnterHash";
     ctx.reply(
@@ -30,6 +36,9 @@ export default function Session(ctx, next) {
     );
   }
   if (state === "EnterHash") {
+    if (ctx.message.text === "Cancel") {
+      ctx.session.state = undefined;
+    }
     ctx.session.hash = ctx.message.text;
     ctx.session.dusername = ctx.message.from?.username;
     ctx.session.duserid = ctx.message.from.id;
@@ -49,6 +58,9 @@ export default function Session(ctx, next) {
     );
   }
   if (state === "EnterWallet") {
+    if (ctx.message.text === "Cancel") {
+      ctx.session.state = undefined;
+    }
     ctx.session.state = undefined;
     ctx.session.wallet = ctx.message.text;
     ctx.session.username = ctx.message.from?.username;
