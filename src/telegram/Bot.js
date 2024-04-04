@@ -142,6 +142,20 @@ function listenToCommands(bot) {
  */
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
+  bot.hears("Cancel", async (ctx, next) => {
+    const mainButtons = {
+      reply_markup: {
+        resize_keyboard: true,
+        keyboard: [
+          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+        ],
+      },
+    };
+    ctx.session.state = undefined;
+    ctx.reply("cancel action !", mainButtons);
+  });
   bot.hears("Account | 📋", async (ctx, next) => {
     ctx.session.state = undefined;
     const userTel = ctx.message.from;
@@ -177,7 +191,18 @@ function listenToMessages(bot) {
   });
   bot.hears("Withdraw | 💵", async (ctx, next) => {
     const userTel = ctx.message.from;
+    const mainButtons = {
+      reply_markup: {
+        resize_keyboard: true,
+        keyboard: [
+          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+        ],
+      },
+    };
     let user = await User.findOne({ id: userTel.id });
+    ctx.reply(mainButtons);
     if (user.balance < process.env.MIN_WITHDRAW) {
       ctx.reply(
         `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
@@ -194,8 +219,20 @@ function listenToMessages(bot) {
   });
   bot.hears("Deposit | 💸", async (ctx, next) => {
     ctx.session.state = "EnterDepositAmount";
+    const mainButtons = {
+      reply_markup: {
+        resize_keyboard: true,
+        keyboard: [
+          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+        ],
+      },
+    };
+
     ctx.reply(
-      `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 4% \n1️⃣ : 48 to 588 RVN daily profit 4% \n2️⃣ : 589 to 2888 RVN daily profit 8% \n3️⃣ : 2888 and above, daily profit of 12% \n\n📛 Minimum deposit 48 RVN \n⚠ Minimum withdrawal of 48 RVN \n⚠ Number of withdrawals once a day \nEnter the amount of RVN you want to Deposit !`
+      `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 4% \n1️⃣ : 48 to 588 RVN daily profit 4% \n2️⃣ : 589 to 2888 RVN daily profit 8% \n3️⃣ : 2888 and above, daily profit of 12% \n\n📛 Minimum deposit 48 RVN \n⚠ Minimum withdrawal of 48 RVN \n⚠ Number of withdrawals once a day \nEnter the amount of RVN you want to Deposit !`,
+      mainButtons
     );
     next();
   });
