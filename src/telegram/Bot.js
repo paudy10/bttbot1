@@ -29,6 +29,7 @@ export async function launchBot(token) {
   listenToMessages(bot);
   listenToQueries(bot);
   connectDB();
+
   // Launch the bot
   await bot.launch(() => console.log("bot launched"));
 
@@ -122,7 +123,7 @@ function listenToCommands(bot) {
         JoinChannel(ctx.message.text.split("/start ")[1])
       );
     }
-    ctx.session.state = "start";
+
     next();
   });
 
@@ -142,7 +143,7 @@ function listenToCommands(bot) {
 function listenToMessages(bot) {
   // Listen to messages and reply with something when ever you receive them
   bot.hears("Account | 📋", async (ctx, next) => {
-    ctx.session.state = "account";
+    ctx.session.state = undefined;
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
     let myref = await User.find({ parent: userTel.id });
@@ -154,7 +155,7 @@ function listenToMessages(bot) {
     next();
   });
   bot.hears("Referral | 👥", async (ctx, next) => {
-    ctx.session.state = "referral";
+    ctx.session.state = undefined;
     ctx.reply(
       `<b>👥 | Your Referral Link</b> : \nhttps://t.me/EarnRavenBot?start=${ctx.update.message.from.id}`,
       { parse_mode: "html" }
@@ -162,12 +163,12 @@ function listenToMessages(bot) {
     next();
   });
   bot.hears("Claim Free RVN | 💰", async (ctx, next) => {
-    ctx.session.state = "claim";
+    ctx.session.state = undefined;
     ctx.reply("Claim RVN Coin", ClaimCoin("RVN"));
     next();
   });
   bot.hears("Support | ☎", async (ctx, next) => {
-    ctx.session.state = "support";
+    ctx.session.state = undefined;
     ctx.reply(
       `Hi ${ctx.message.from.first_name} 👋 \nIf you are facing any issues related to this bots . \nWe are here to help you ❤️.`,
       SOS()
