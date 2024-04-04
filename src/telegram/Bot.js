@@ -171,7 +171,7 @@ function listenToMessages(bot) {
   bot.hears("Referral | 👥", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply(
-      `<b>👥 | Your Referral Link</b> : \nhttps://t.me/EarnRavenBot?start=${ctx.update.message.from.id}`,
+      `<b>👥 | Your Referral Link</b> : \nhttps://t.me/EarnRvnBot?start=${ctx.update.message.from.id}`,
       { parse_mode: "html" }
     );
     next();
