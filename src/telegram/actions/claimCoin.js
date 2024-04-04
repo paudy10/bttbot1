@@ -5,7 +5,7 @@ export const ClaimCoin = (COIN) => {
       inline_keyboard: [
         [
           {
-            text: "Claim",
+            text: "✅ | Claim",
             callback_data: `Claim${COIN}`,
           },
         ],

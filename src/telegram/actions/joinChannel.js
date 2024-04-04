@@ -5,13 +5,13 @@ export const JoinChannel = (id) => {
       inline_keyboard: [
         [
           {
-            text: "BABY DOGE AirDrop",
+            text: "RVN Channel",
             url: process.env.CHANNEL_LINK,
           },
         ],
         [
           {
-            text: "CHECK",
+            text: "✅ | CHECK",
             url: `${process.env.STARTBOT}${id ? `=${id}` : ""}`,
           },
         ],

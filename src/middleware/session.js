@@ -9,13 +9,15 @@ export default function Session(ctx, next) {
     ctx.session.amount = parseInt(ctx.message.text);
     if (ctx.session.amount < process.env.MIN_WITHDRAW) {
       ctx.reply(
-        `your amount : ${ctx.session.amount} \nminimum amount to withdraw : ${process.env.MIN_WITHDRAW}`
+        `<b>💵 Your amount</b> : ${ctx.session.amount} \n<b>⚠ Minimum amount to withdraw</b> : ${process.env.MIN_WITHDRAW}`,
+        { parse_mode: "html" }
       );
       ctx.session.state = undefined;
     } else {
       ctx.session.state = "EnterWallet";
       ctx.reply(
-        `your amount to withdraw : ${ctx.session.amount} \nSend Your Wallet Address !`
+        `<b>💵 Your amount to withdraw</b> : ${ctx.session.amount} \nSend Your Wallet Address !`,
+        { parse_mode: "html" }
       );
     }
   }
@@ -23,7 +25,8 @@ export default function Session(ctx, next) {
     ctx.session.Damount = parseInt(ctx.message.text);
     ctx.session.state = "EnterHash";
     ctx.reply(
-      `your amount to Deposit : ${ctx.session.Damount} \nSend to this wallet address : \n${process.env.WALLET} \n\nEnter Transaction HASH !`
+      `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \nSend to this wallet address : \n${process.env.WALLET} \n\nEnter Transaction HASH !`,
+      { parse_mode: "html" }
     );
   }
   if (state === "EnterHash") {
@@ -32,7 +35,8 @@ export default function Session(ctx, next) {
     ctx.session.duserid = ctx.message.from.id;
     ctx.session.state = undefined;
     ctx.reply(
-      `Pending... \nyour amount to Deposit : ${ctx.session.Damount} \nYour Transaction HASH : \n${ctx.session.hash} \nadmin barresi mikone bade tayid be balance ezafe mishe !`
+      `<b>Pending...</b> \n<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \n<b>Your Transaction HASH</b> : \n${ctx.session.hash} \n\n⚠ Your payment will be checked by the admin and will be automatically added to your account after confirmation !`,
+      { parse_mode: "html" }
     );
     ctx.telegram.sendMessage(
       process.env.GP_ID,
@@ -50,7 +54,7 @@ export default function Session(ctx, next) {
     ctx.session.username = ctx.message.from?.username;
     ctx.session.userid = ctx.message.from.id;
     ctx.reply(
-      `your amount to withdraw : ${ctx.session.amount} \nyour wallet address : ${ctx.session.wallet} \nPress Confirm To withraw !`,
+      `💵 Your amount to withdraw : ${ctx.session.amount} \n💳 Your wallet address : ${ctx.session.wallet} \n\n✅ Press Confirm To withraw !`,
       ConfirmWithdraw()
     );
   }

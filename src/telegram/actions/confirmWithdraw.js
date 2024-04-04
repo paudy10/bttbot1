@@ -5,7 +5,7 @@ export const ConfirmWithdraw = () => {
       inline_keyboard: [
         [
           {
-            text: "Confirm",
+            text: "✅ | Confirm",
             callback_data: `ConfirmWithdraw`,
           },
         ],

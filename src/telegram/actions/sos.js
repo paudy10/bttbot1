@@ -5,7 +5,7 @@ export const SOS = () => {
       inline_keyboard: [
         [
           {
-            text: "Support",
+            text: "📞 | Support",
             url: process.env.SUPPORTER,
           },
         ],

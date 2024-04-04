@@ -103,12 +103,12 @@ function listenToCommands(bot) {
           resize_keyboard: true,
           keyboard: [
             [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-            [{ text: "Withdraw | 💵" }, { text: "Claim Free BTT | 💰" }],
+            [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
             [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
           ],
         },
       };
-      ctx.reply(`Welcome To BTT Bot ! 🔥`, mainButtons);
+      ctx.reply(`Welcome To RVN Bot ! 🔥`, mainButtons);
     };
     if (
       chat.status == "member" ||
@@ -157,14 +157,14 @@ function listenToMessages(bot) {
   bot.hears("Referral | 👥", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.reply(
-      `<b>👥 | Your Referral Link</b> : \nhttps://t.me/BTT_BBOT?start=${ctx.update.message.from.id}`,
+      `<b>👥 | Your Referral Link</b> : \nhttps://t.me/RVN_BBOT?start=${ctx.update.message.from.id}`,
       { parse_mode: "html" }
     );
     next();
   });
-  bot.hears("Claim Free BTT | 💰", async (ctx, next) => {
+  bot.hears("Claim Free RVN | 💰", async (ctx, next) => {
     ctx.session.state = undefined;
-    ctx.reply("Claim BTT Coin", ClaimCoin("BABYDOGE"));
+    ctx.reply("Claim RVN Coin", ClaimCoin("RVN"));
     next();
   });
   bot.hears("Support | ☎", async (ctx, next) => {
@@ -180,13 +180,14 @@ function listenToMessages(bot) {
     let user = await User.findOne({ id: userTel.id });
     if (user.balance < process.env.MIN_WITHDRAW) {
       ctx.reply(
-        `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum BabyDoge to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
+        `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
         { parse_mode: "html" }
       );
     } else {
       ctx.session.state = "EnterWithdrawAmount";
       ctx.reply(
-        `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum BabyDoge to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>✅ Enter the amount of BabyDoge you want to withdraw !</b>`
+        `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>✅ Enter the amount of RVN you want to withdraw !</b>`,
+        { parse_mode: "html" }
       );
     }
     next();
@@ -194,7 +195,7 @@ function listenToMessages(bot) {
   bot.hears("Deposit | 💸", async (ctx, next) => {
     ctx.session.state = "EnterDepositAmount";
     ctx.reply(
-      `matne englisi tozihate deposit \nEnter the amount of BabyDoge you want to Deposit !`
+      `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 4% \n1️⃣ : 48 to 588 RVN daily profit 4% \n2️⃣ : 589 to 2888 RVN daily profit 8% \n3️⃣ : 2888 and above, daily profit of 12% \n\n📛 Minimum deposit 48 RVN \n⚠ Minimum withdrawal of 48 RVN \n⚠ Number of withdrawals once a day \nEnter the amount of RVN you want to Deposit !`
     );
     next();
   });
@@ -279,7 +280,7 @@ function listenToQueries(bot) {
     if (!ctx.update.callback_query) return next();
     const callback_data = ctx.update.callback_query.data;
     if (callback_data) {
-      if (callback_data === "ClaimBABYDOGE") {
+      if (callback_data === "ClaimRVN") {
         let id = ctx.update.callback_query.from.id;
         let user = await User.findOne({
           id: id,
@@ -293,7 +294,7 @@ function listenToQueries(bot) {
         let messageID = ctx.update.callback_query.message.message_id;
         let chatID = ctx.update.callback_query.message.chat.id;
         ctx.telegram.deleteMessage(chatID, messageID);
-        ctx.reply(`Collect ${process.env.CLAIM_PRIZE} BABY DOGE !`);
+        ctx.reply(`✅ Collect ${process.env.CLAIM_PRIZE} RVN !`);
       }
       if (callback_data === "ConfirmWithdraw") {
         ctx.session.state = undefined;
@@ -314,7 +315,9 @@ function listenToQueries(bot) {
           date: new Date(),
         });
         await withdraw.save();
-        ctx.reply(`withdraw successfull !`);
+        ctx.reply(
+          `✅ withdraw successfull ! \nYour withdrawal will be checked by the supporter and will be deposited automatically after confirmation`
+        );
         let id = ctx.update.callback_query.from.id;
         let user = await User.findOne({
           id: id,
