@@ -111,10 +111,9 @@ function listenToCommands(bot) {
       ctx.reply(`Welcome To RVN Bot ! 🔥`, mainButtons);
     };
     if (
-      // chat.status == "member" ||
-      // chat.status == "creator" ||
-      // chat.status == "administrator"
-      true
+      chat.status == "member" ||
+      chat.status == "creator" ||
+      chat.status == "administrator"
     ) {
       starter(ctx);
     } else {
