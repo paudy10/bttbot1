@@ -285,7 +285,7 @@ function listenToQueries(bot) {
         let user = await User.findOne({
           id: id,
         });
-        let balance = user.balance + parseInt(process.env.CLAIM_PRIZE);
+        let balance = user.balance + parseFloat(process.env.CLAIM_PRIZE);
         let UpdUser = await User.findOneAndUpdate(
           { id: id },
           { balance },
