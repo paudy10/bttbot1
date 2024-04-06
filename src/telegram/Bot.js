@@ -110,9 +110,9 @@ function listenToCommands(bot) {
       };
       ctx.replyWithPhoto(
         "AgACAgQAAx0Cez-BrgACAcpmEOElhXoau9JL2xGxoZbG_VAOWgACNsIxGzp9iFDY5N5Ciaja7AEAAwIAA3gAAzQE",
-        { caption: `Welcome To RVN Bot ! 🔥` },
-        mainButtons
+        { caption: `Welcome To RVN Bot ! 🔥` }
       );
+      ctx.reply("", mainButtons);
     };
     if (
       chat.status == "member" ||
