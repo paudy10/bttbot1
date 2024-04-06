@@ -294,6 +294,10 @@ function listenToMessages(bot) {
   // bot.on(message("sticker"), async (ctx) => {
   //   ctx.reply("I like your sticker! 🔥");
   // });
+  bot.on(message("photo"), async (ctx) => {
+    ctx.reply("I like your sticker! 🔥");
+    console.log(ctx.message);
+  });
 }
 
 /**
