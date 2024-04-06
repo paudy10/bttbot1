@@ -112,7 +112,14 @@ function listenToCommands(bot) {
         "AgACAgQAAx0Cez-BrgACAcpmEOElhXoau9JL2xGxoZbG_VAOWgACNsIxGzp9iFDY5N5Ciaja7AEAAwIAA3gAAzQE",
         { caption: `Welcome To RVN Bot ! 🔥` }
       );
-      ctx.reply("", mainButtons);
+      ctx.reply_markup({
+        resize_keyboard: true,
+        keyboard: [
+          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+        ],
+      });
     };
     if (
       chat.status == "member" ||
