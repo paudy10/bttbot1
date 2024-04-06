@@ -295,7 +295,16 @@ function listenToMessages(bot) {
   //   ctx.reply("I like your sticker! 🔥");
   // });
   bot.on(message("photo"), async (ctx) => {
-    ctx.reply("I like your sticker! 🔥");
+    await ctx.telegram
+      .sendChatAction(ctx.message.from.id, "upload_photo")
+      .then()
+      .catch((err) => {
+        console.log(err);
+      });
+    ctx.replyWithPhoto(
+      ctx.message.photo[2].file_id,
+      ctx.message.photo[2].file_id
+    );
     console.log(ctx.message);
   });
 }
