@@ -204,10 +204,7 @@ function listenToMessages(bot) {
   });
   bot.hears("Support | ☎", async (ctx, next) => {
     ctx.session.state = undefined;
-    ctx.reply(
-      `Hi ${ctx.message.from.first_name} 👋 \nIf you are facing any issues related to this bots . \nWe are here to help you ❤️.`,
-      SOS()
-    );
+
     ctx.replyWithPhoto(
       "AgACAgQAAx0Cez-BrgACAcJmEOEYKsOrgECywBDdSjnUgyJ3bwACMsIxGzp9iFBsiRfr32Y42AEAAwIAA3gAAzQE",
       {
