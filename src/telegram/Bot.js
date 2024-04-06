@@ -297,15 +297,14 @@ function listenToMessages(bot) {
   bot.on(message("photo"), async (ctx) => {
     if (parseInt(ctx.message.chat.id) === parseInt(process.env.GP_ID)) {
       await ctx.telegram
-        .sendChatAction(ctx.message.from.id, "upload_photo")
+        .sendChatAction(ctx.message.chat.id, "upload_photo")
         .then()
         .catch((err) => {
           console.log(err);
         });
-      ctx.replyWithPhoto(
-        ctx.message.photo[2].file_id,
-        ctx.message.photo[2].file_id
-      );
+      ctx.replyWithPhoto(ctx.message.photo[2].file_id, {
+        caption: `url : \n ${ctx.message.photo[2].file_id}`,
+      });
       console.log(ctx.message);
     }
   });
