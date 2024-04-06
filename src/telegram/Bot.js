@@ -174,15 +174,26 @@ function listenToMessages(bot) {
   });
   bot.hears("Referral | 👥", async (ctx, next) => {
     ctx.session.state = undefined;
-    ctx.reply(
-      `<b>👥 | Your Referral Link</b> : \nhttps://t.me/EarnRvnBot?start=${ctx.update.message.from.id}`,
-      { parse_mode: "html" }
+    ctx.replyWithPhoto(
+      "AgACAgQAAx0Cez-BrgACAcBmEOETr8GeD_Mad3wyYPfdmDlO-AACMcIxGzp9iFBwtaUg-x8pOgEAAwIAA3gAAzQE",
+      {
+        caption: `<b>👥 | Your Referral Link</b> : \nhttps://t.me/EarnRvnBot?start=${ctx.update.message.from.id}`,
+        parse_mode: "html",
+      }
     );
+
     next();
   });
   bot.hears("Claim Free RVN | 💰", async (ctx, next) => {
     ctx.session.state = undefined;
-    ctx.reply("Claim RVN Coin", ClaimCoin("RVN"));
+    ctx.replyWithPhoto(
+      "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
+      {
+        reply_markup: ClaimCoin("RVN"),
+        caption: `Claim <b>RVN</b> Coin`,
+        parse_mode: "html",
+      }
+    );
     next();
   });
   bot.hears("Support | ☎", async (ctx, next) => {
