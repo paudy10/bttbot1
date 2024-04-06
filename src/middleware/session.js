@@ -2,7 +2,7 @@ import { stat } from "fs";
 import { ConfirmWithdraw } from "../telegram/actions/confirmWithdraw.js";
 
 export default function Session(ctx, next) {
-  if (ctx.message.chat.id !== parseInt(process.env.CHANNEL_ID)) {
+  if (ctx?.channel_post?.chat?.id !== parseInt(process.env.CHANNEL_ID)) {
     if (!ctx.session.state) return next();
     const state = ctx.session.state;
     if (ctx.message.text === "Cancel") {
