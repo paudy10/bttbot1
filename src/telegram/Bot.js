@@ -107,7 +107,7 @@ function listenToCommands(bot) {
         ],
       };
       ctx.replyWithPhoto(
-        "AgACAgQAAx0Cez-BrgACAchmEOEjx4W-Y2HMbnyisQgBtNtN9AACNcIxGzp9iFAPkVnhL0tSJwEAAwIAA3gAAzQE",
+        "AgACAgQAAx0Cez-BrgACAcpmEOElhXoau9JL2xGxoZbG_VAOWgACNsIxGzp9iFDY5N5Ciaja7AEAAwIAA3gAAzQE",
         {
           reply_markup: mainButtons,
           caption: `Welcome To RVN Bot ! 🔥`,
