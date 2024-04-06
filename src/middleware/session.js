@@ -48,9 +48,12 @@ export default function Session(ctx, next) {
     ctx.session.dusername = ctx.message.from?.username;
     ctx.session.duserid = ctx.message.from.id;
     ctx.session.state = undefined;
-    ctx.reply(
-      `<b>Pending...</b> \n<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \n<b>Your Transaction HASH</b> : \n${ctx.session.hash} \n\n⚠ Your payment will be checked by the admin and will be automatically added to your account after confirmation !`,
-      { parse_mode: "html" }
+    ctx.replyWithPhoto(
+      "AgACAgQAAx0Cez-BrgACAcRmEOEdvkDOM9WJ-gtzmLynNIsarwACM8IxGzp9iFBeDK4AAauXcFsBAAMCAAN4AAM0BA",
+      {
+        caption: `<b>Pending...</b> \n<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \n<b>Your Transaction HASH</b> : \n${ctx.session.hash} \n\n⚠ Your payment will be checked by the admin and will be automatically added to your account after confirmation !`,
+        parse_mode: "html",
+      }
     );
     ctx.telegram.sendMessage(
       process.env.GP_ID,

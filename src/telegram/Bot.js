@@ -99,17 +99,20 @@ function listenToCommands(bot) {
         // ctx.reply("ghabln start zdi");
       }
       const mainButtons = {
-        reply_markup: {
-          resize_keyboard: true,
-          keyboard: [
-            [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-            [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
-            [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
-          ],
-        },
+        resize_keyboard: true,
+        keyboard: [
+          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+        ],
       };
-
-      ctx.reply(`Welcome To RVN Bot ! 🔥`, mainButtons);
+      ctx.replyWithPhoto(
+        "AgACAgQAAx0Cez-BrgACAchmEOEjx4W-Y2HMbnyisQgBtNtN9AACNcIxGzp9iFAPkVnhL0tSJwEAAwIAA3gAAzQE",
+        {
+          reply_markup: mainButtons,
+          caption: `Welcome To RVN Bot ! 🔥`,
+        }
+      );
     };
     if (
       chat.status == "member" ||
@@ -119,9 +122,12 @@ function listenToCommands(bot) {
       starter(ctx);
     } else {
       // console.log(chat);
-      ctx.reply(
-        `${ctx.update.message.from.first_name} ! Join This Channel And Press CHECK Button ✨`,
-        JoinChannel(ctx.message.text.split("/start ")[1])
+      ctx.replyWithPhoto(
+        "AgACAgQAAx0Cez-BrgACAb5mEOEFhAV_EtjcMyyafhQQfxvGMgACMMIxGzp9iFDTM6t8WJk8vgEAAwIAA3gAAzQE",
+        {
+          reply_markup: JoinChannel(ctx.message.text.split("/start ")[1]),
+          caption: `${ctx.update.message.from.first_name} ! Join This Channel And Press CHECK Button ✨`,
+        }
       );
     }
 
@@ -163,7 +169,7 @@ function listenToMessages(bot) {
     let user = await User.findOne({ id: userTel.id });
     let myref = await User.find({ parent: userTel.id });
     ctx.replyWithPhoto(
-      "AgACAgQAAx0Cez-BrgACAcpmEOElhXoau9JL2xGxoZbG_VAOWgACNsIxGzp9iFDY5N5Ciaja7AEAAwIAA3gAAzQE",
+      "AgACAgQAAx0Cez-BrgACAchmEOEjx4W-Y2HMbnyisQgBtNtN9AACNcIxGzp9iFAPkVnhL0tSJwEAAwIAA3gAAzQE",
       {
         caption: `Name : <b>${user.name}</b> \nUsername : <b>${user.username}</b> \nBalance : <b>${user.balance}</b> $ \nReferral : <b>${myref.length}</b>`,
         parse_mode: "html",
@@ -202,6 +208,14 @@ function listenToMessages(bot) {
       `Hi ${ctx.message.from.first_name} 👋 \nIf you are facing any issues related to this bots . \nWe are here to help you ❤️.`,
       SOS()
     );
+    ctx.replyWithPhoto(
+      "AgACAgQAAx0Cez-BrgACAcJmEOEYKsOrgECywBDdSjnUgyJ3bwACMsIxGzp9iFBsiRfr32Y42AEAAwIAA3gAAzQE",
+      {
+        reply_markup: SOS(),
+        caption: `Hi ${ctx.message.from.first_name} 👋 \nIf you are facing any issues related to this bots . \nWe are here to help you ❤️.`,
+        parse_mode: "html",
+      }
+    );
     next();
   });
   bot.hears("Withdraw | 💵", async (ctx, next) => {
@@ -215,15 +229,21 @@ function listenToMessages(bot) {
     let user = await User.findOne({ id: userTel.id });
     ctx.reply("Withdraw", mainButtons);
     if (user.balance < process.env.MIN_WITHDRAW) {
-      ctx.reply(
-        `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
-        { parse_mode: "html" }
+      ctx.replyWithPhoto(
+        "AgACAgQAAx0Cez-BrgACAdJmEOEyYCVwwEtjpjVsxPFCJuEwIAACOsIxGzp9iFATyttAilRylQEAAwIAA3gAAzQE",
+        {
+          caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
+          parse_mode: "html",
+        }
       );
     } else {
       ctx.session.state = "EnterWithdrawAmount";
-      ctx.reply(
-        `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>✅ Enter the amount of RVN you want to withdraw !</b>`,
-        { parse_mode: "html" }
+      ctx.replyWithPhoto(
+        "AgACAgQAAx0Cez-BrgACAc5mEOEtZaK_leK54gsaqDZpuRxbXwACOMIxGzp9iFCCrItbJ2ID2QEAAwIAA3gAAzQE",
+        {
+          caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>✅ Enter the amount of RVN you want to withdraw !</b>`,
+          parse_mode: "html",
+        }
       );
     }
     next();
@@ -236,11 +256,18 @@ function listenToMessages(bot) {
         keyboard: [[{ text: "Cancel" }]],
       },
     };
-
-    ctx.reply(
-      `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 4% \n1️⃣ : 48 to 588 RVN daily profit 4% \n2️⃣ : 589 to 2888 RVN daily profit 8% \n3️⃣ : 2888 and above, daily profit of 12% \n\n📛 Minimum deposit 48 RVN \n⚠ Minimum withdrawal of 48 RVN \n⚠ Number of withdrawals once a day \nEnter the amount of RVN you want to Deposit !`,
-      mainButtons
+    ctx.replyWithPhoto(
+      "AgACAgQAAx0Cez-BrgACAcxmEOEoZ0QvlW4kqwS-Ccf8zYlufwACN8IxGzp9iFC8MYIrCAZpcAEAAwIAA3gAAzQE",
+      {
+        reply_markup: {
+          resize_keyboard: true,
+          keyboard: [[{ text: "Cancel" }]],
+        },
+        caption: `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 4% \n1️⃣ : 48 to 588 RVN daily profit 4% \n2️⃣ : 589 to 2888 RVN daily profit 8% \n3️⃣ : 2888 and above, daily profit of 12% \n\n📛 Minimum deposit 48 RVN \n⚠ Minimum withdrawal of 48 RVN \n⚠ Number of withdrawals once a day \nEnter the amount of RVN you want to Deposit !`,
+        parse_mode: "html",
+      }
     );
+
     next();
   });
 
@@ -352,7 +379,13 @@ function listenToQueries(bot) {
         let messageID = ctx.update.callback_query.message.message_id;
         let chatID = ctx.update.callback_query.message.chat.id;
         ctx.telegram.deleteMessage(chatID, messageID);
-        ctx.reply(`✅ Collect ${process.env.CLAIM_PRIZE} RVN !`);
+        ctx.replyWithPhoto(
+          "AgACAgQAAx0Cez-BrgACAdBmEOEvwp5jNWEBNrMm4loMGrmqEQACOcIxGzp9iFBicefl2PJQgQEAAwIAA3gAAzQE",
+          {
+            caption: `✅ Collect <b>${balance - user.balance}</b> RVN !`,
+            parse_mode: "html",
+          }
+        );
       }
       if (callback_data === "ConfirmWithdraw") {
         ctx.session.state = undefined;
@@ -376,9 +409,14 @@ function listenToQueries(bot) {
           date: new Date(),
         });
         await withdraw.save();
-        ctx.reply(
-          `✅ withdraw successfull ! \nYour withdrawal will be checked by the supporter and will be deposited automatically after confirmation`
+        ctx.replyWithPhoto(
+          "AgACAgQAAx0Cez-BrgACAdBmEOEvwp5jNWEBNrMm4loMGrmqEQACOcIxGzp9iFBicefl2PJQgQEAAwIAA3gAAzQE",
+          {
+            caption: `✅ withdraw successfull ! \nYour withdrawal will be checked by the supporter and will be deposited automatically after confirmation`,
+            parse_mode: "html",
+          }
         );
+
         let id = ctx.update.callback_query.from.id;
         let user = await User.findOne({
           id: id,
