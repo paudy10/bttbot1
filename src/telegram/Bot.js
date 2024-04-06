@@ -108,18 +108,8 @@ function listenToCommands(bot) {
           ],
         },
       };
-      ctx.replyWithPhoto(
-        "AgACAgQAAx0Cez-BrgACAcpmEOElhXoau9JL2xGxoZbG_VAOWgACNsIxGzp9iFDY5N5Ciaja7AEAAwIAA3gAAzQE",
-        { caption: `Welcome To RVN Bot ! 🔥` }
-      );
-      ctx.reply_markup({
-        resize_keyboard: true,
-        keyboard: [
-          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
-          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
-        ],
-      });
+
+      ctx.reply(`Welcome To RVN Bot ! 🔥`, mainButtons);
     };
     if (
       chat.status == "member" ||
@@ -172,11 +162,14 @@ function listenToMessages(bot) {
     const userTel = ctx.message.from;
     let user = await User.findOne({ id: userTel.id });
     let myref = await User.find({ parent: userTel.id });
-    ctx.reply(
-      `Name : <b>${user.name}</b> \nUsername : <b>${user.username}</b> \nBalance : <b>${user.balance}</b> $ \nReferral : <b>${myref.length}</b>
-    `,
-      { parse_mode: "html" }
+    ctx.replyWithPhoto(
+      "AgACAgQAAx0Cez-BrgACAcpmEOElhXoau9JL2xGxoZbG_VAOWgACNsIxGzp9iFDY5N5Ciaja7AEAAwIAA3gAAzQE",
+      {
+        caption: `Name : <b>${user.name}</b> \nUsername : <b>${user.username}</b> \nBalance : <b>${user.balance}</b> $ \nReferral : <b>${myref.length}</b>`,
+        parse_mode: "html",
+      }
     );
+
     next();
   });
   bot.hears("Referral | 👥", async (ctx, next) => {
