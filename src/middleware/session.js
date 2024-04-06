@@ -2,8 +2,8 @@ import { stat } from "fs";
 import { ConfirmWithdraw } from "../telegram/actions/confirmWithdraw.js";
 
 export default function Session(ctx, next) {
-  if (!ctx.session.state) return next();
-  const state = ctx.session.state;
+  if (!ctx.session?.state) return next();
+  const state = ctx.session?.state;
   if (ctx.message.text === "Cancel") {
     const mainButtons = {
       reply_markup: {
