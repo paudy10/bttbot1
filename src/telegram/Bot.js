@@ -106,6 +106,7 @@ function listenToCommands(bot) {
           [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
         ],
       };
+
       ctx.replyWithPhoto(
         "AgACAgQAAx0Cez-BrgACAcpmEOElhXoau9JL2xGxoZbG_VAOWgACNsIxGzp9iFDY5N5Ciaja7AEAAwIAA3gAAzQE",
         {
