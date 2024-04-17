@@ -4,7 +4,7 @@ import { ConfirmWithdraw } from "../telegram/actions/confirmWithdraw.js";
 export default function Session(ctx, next) {
   if (!ctx.session?.state) return next();
   const state = ctx.session?.state;
-  if (ctx.message.text === "Cancel") {
+  if (ctx?.message?.text === "Cancel") {
     const mainButtons = {
       reply_markup: {
         resize_keyboard: true,
@@ -37,7 +37,7 @@ export default function Session(ctx, next) {
   }
   if (state === "EnterDepositAmount" && ctx.message.text !== "Cancel") {
     ctx.session.Damount = parseInt(ctx.message.text);
-
+    ctx.session.state = undefined;
     ctx.reply(
       `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount}  \n\nSelect the Your currency for transfer  !`,
       {
