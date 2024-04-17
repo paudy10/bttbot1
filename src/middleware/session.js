@@ -42,20 +42,23 @@ export default function Session(ctx, next) {
       `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount}  \n\nSelect the Your currency for transfer  !`,
       {
         parse_mode: "html",
-        inline_keyboard: [
-          [
-            {
-              text: "1️⃣ | Raven Address",
-              callback_data: `SendRVN`,
-            },
+        reply_markup: {
+          resize_keyboard: true,
+          inline_keyboard: [
+            [
+              {
+                text: "1️⃣ | Raven Address",
+                callback_data: `SendRVN`,
+              },
+            ],
+            [
+              {
+                text: "2️⃣ | Tether Address",
+                callback_data: `SendTether`,
+              },
+            ],
           ],
-          [
-            {
-              text: "2️⃣ | Tether Address",
-              callback_data: `SendTether`,
-            },
-          ],
-        ],
+        },
       }
     );
   }
