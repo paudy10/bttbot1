@@ -219,10 +219,8 @@ function listenToMessages(bot) {
   bot.hears("Withdraw | 💵", async (ctx, next) => {
     const userTel = ctx.message.from;
     const mainButtons = {
-      reply_markup: {
-        resize_keyboard: true,
-        keyboard: [[{ text: "Cancel" }]],
-      },
+      resize_keyboard: true,
+      keyboard: [[{ text: "Cancel" }]],
     };
     const mainButton = {
       resize_keyboard: true,
