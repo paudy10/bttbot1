@@ -423,11 +423,20 @@ function listenToQueries(bot) {
           date: new Date(),
         });
         await withdraw.save();
+        const mainButtons = {
+          resize_keyboard: true,
+          keyboard: [
+            [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+            [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+            [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+          ],
+        };
         ctx.replyWithPhoto(
           "AgACAgQAAx0Cez-BrgACAdBmEOEvwp5jNWEBNrMm4loMGrmqEQACOcIxGzp9iFBicefl2PJQgQEAAwIAA3gAAzQE",
           {
             caption: `✅ withdraw successfull ! \nYour withdrawal will be checked by the supporter and will be deposited automatically after confirmation`,
             parse_mode: "html",
+            reply_markup: mainButtons,
           }
         );
 
