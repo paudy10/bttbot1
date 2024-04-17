@@ -385,6 +385,20 @@ function listenToQueries(bot) {
           }
         );
       }
+      if (callback_data === "SendRVN") {
+        ctx.session.state = "EnterHash";
+        ctx.reply(
+          `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \nSend to this wallet address : \n${process.env.RVNWALLET}  \n\nEnter Transaction HASH  !`,
+          { parse_mode: "html" }
+        );
+      }
+      if (callback_data === "SendTether") {
+        ctx.session.state = "EnterHash";
+        ctx.reply(
+          `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \nSend to this Tether Wallet Address : \n${process.env.TETHERWALLET}  \n\nEnter Transaction HASH  !`,
+          { parse_mode: "html" }
+        );
+      }
       if (callback_data === "ConfirmWithdraw") {
         ctx.session.state = undefined;
         let messageID = ctx.update.callback_query.message.message_id;

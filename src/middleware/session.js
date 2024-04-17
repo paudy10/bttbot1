@@ -37,10 +37,26 @@ export default function Session(ctx, next) {
   }
   if (state === "EnterDepositAmount" && ctx.message.text !== "Cancel") {
     ctx.session.Damount = parseInt(ctx.message.text);
-    ctx.session.state = "EnterHash";
+
     ctx.reply(
-      `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \nSend to this wallet address : \n${process.env.WALLET} \n\nEnter Transaction HASH !`,
-      { parse_mode: "html" }
+      `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount}  \n\nSelect the Your currency for transfer  !`,
+      {
+        parse_mode: "html",
+        inline_keyboard: [
+          [
+            {
+              text: "1️⃣ | Raven Address",
+              callback_data: `SendRVN`,
+            },
+          ],
+          [
+            {
+              text: "2️⃣ | Tether Address",
+              callback_data: `SendTether`,
+            },
+          ],
+        ],
+      }
     );
   }
   if (state === "EnterHash" && ctx.message.text !== "Cancel") {
