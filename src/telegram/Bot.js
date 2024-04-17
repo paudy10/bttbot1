@@ -397,6 +397,9 @@ function listenToQueries(bot) {
         );
       }
       if (callback_data === "SendRVN") {
+        let messageID = ctx.update.callback_query.message.message_id;
+        let chatID = ctx.update.callback_query.message.chat.id;
+        ctx.telegram.deleteMessage(chatID, messageID);
         ctx.session.send = "Raven";
         ctx.session.state = "EnterHash";
         ctx.reply(
@@ -405,6 +408,9 @@ function listenToQueries(bot) {
         );
       }
       if (callback_data === "SendTether") {
+        let messageID = ctx.update.callback_query.message.message_id;
+        let chatID = ctx.update.callback_query.message.chat.id;
+        ctx.telegram.deleteMessage(chatID, messageID);
         ctx.session.state = "EnterHash";
         ctx.session.send = "Tether";
         ctx.reply(
