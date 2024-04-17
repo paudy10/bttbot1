@@ -386,6 +386,7 @@ function listenToQueries(bot) {
         );
       }
       if (callback_data === "SendRVN") {
+        ctx.session.send = "Raven";
         ctx.session.state = "EnterHash";
         ctx.reply(
           `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \nSend to this wallet address : \n${process.env.RVNWALLET}  \n\nEnter Transaction HASH  !`,
@@ -394,6 +395,7 @@ function listenToQueries(bot) {
       }
       if (callback_data === "SendTether") {
         ctx.session.state = "EnterHash";
+        ctx.session.send = "Tether";
         ctx.reply(
           `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \nSend to this Tether Wallet Address : \n${process.env.TETHERWALLET}  \n\nEnter Transaction HASH  !`,
           { parse_mode: "html" }

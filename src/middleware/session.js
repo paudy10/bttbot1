@@ -70,7 +70,7 @@ export default function Session(ctx, next) {
     ctx.replyWithPhoto(
       "AgACAgQAAx0Cez-BrgACAcRmEOEdvkDOM9WJ-gtzmLynNIsarwACM8IxGzp9iFBeDK4AAauXcFsBAAMCAAN4AAM0BA",
       {
-        caption: `<b>Pending...</b> \n<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \n<b>Your Transaction HASH</b> : \n${ctx.session.hash} \n\n⚠ Your payment will be checked by the admin and will be automatically added to your account after confirmation !`,
+        caption: `<b>Pending...</b> \n<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} ${ctx.session.send} \n<b>Your Transaction HASH</b> : \n${ctx.session.hash} \n\n⚠ Your payment will be checked by the admin and will be automatically added to your account after confirmation !`,
         parse_mode: "html",
       }
     );
