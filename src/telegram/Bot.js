@@ -248,7 +248,10 @@ function listenToMessages(bot) {
         {
           caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>✅ Enter the amount of RVN you want to withdraw !</b>`,
           parse_mode: "html",
-          reply_markup: mainButtons,
+          reply_markup: {
+            resize_keyboard: true,
+            keyboard: [[{ text: "Cancel" }]],
+          },
         }
       );
     }
