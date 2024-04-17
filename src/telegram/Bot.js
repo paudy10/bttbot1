@@ -9,6 +9,7 @@ import connectDB from "../database/index.js";
 import { JoinChannel } from "./actions/joinChannel.js";
 import LocalSession from "telegraf-session-local";
 import Session from "../middleware/session.js";
+import keep_alive from "../http/keep_alive.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -29,7 +30,7 @@ export async function launchBot(token) {
   listenToMessages(bot);
   listenToQueries(bot);
   connectDB();
-
+  keep_alive();
   // Launch the bot
   await bot.launch(() => console.log("bot launched"));
 
