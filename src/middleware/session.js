@@ -22,9 +22,17 @@ export default function Session(ctx, next) {
     ctx.session.amount = parseInt(ctx.message.text);
 
     if (ctx.session.amount < process.env.MIN_WITHDRAW) {
+      const mainButtons = {
+        resize_keyboard: true,
+        keyboard: [
+          [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+        ],
+      };
       ctx.reply(
         `<b>💵 Your amount</b> : ${ctx.session.amount} \n<b>⚠ Minimum amount to withdraw</b> : ${process.env.MIN_WITHDRAW}`,
-        { parse_mode: "html" }
+        { parse_mode: "html", reply_markup: mainButtons }
       );
       ctx.session.state = undefined;
     } else {
@@ -67,11 +75,20 @@ export default function Session(ctx, next) {
     ctx.session.dusername = ctx.message.from?.username;
     ctx.session.duserid = ctx.message.from.id;
     ctx.session.state = undefined;
+    const mainButtons = {
+      resize_keyboard: true,
+      keyboard: [
+        [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+        [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+        [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+      ],
+    };
     ctx.replyWithPhoto(
       "AgACAgQAAx0Cez-BrgACAcRmEOEdvkDOM9WJ-gtzmLynNIsarwACM8IxGzp9iFBeDK4AAauXcFsBAAMCAAN4AAM0BA",
       {
         caption: `<b>Pending...</b> \n<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} ${ctx.session.send} \n<b>Your Transaction HASH</b> : \n${ctx.session.hash} \n\n⚠ Your payment will be checked by the admin and will be automatically added to your account after confirmation !`,
         parse_mode: "html",
+        reply_markup: mainButtons,
       }
     );
     ctx.telegram.sendMessage(

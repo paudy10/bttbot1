@@ -224,14 +224,23 @@ function listenToMessages(bot) {
         keyboard: [[{ text: "Cancel" }]],
       },
     };
+    const mainButton = {
+      resize_keyboard: true,
+      keyboard: [
+        [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
+        [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
+        [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+      ],
+    };
     let user = await User.findOne({ id: userTel.id });
-    ctx.reply("Withdraw", mainButtons);
+    // ctx.reply("Withdraw", mainButtons);
     if (user.balance < process.env.MIN_WITHDRAW) {
       ctx.replyWithPhoto(
         "AgACAgQAAx0Cez-BrgACAdJmEOEyYCVwwEtjpjVsxPFCJuEwIAACOsIxGzp9iFATyttAilRylQEAAwIAA3gAAzQE",
         {
           caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
           parse_mode: "html",
+          reply_markup: mainButton,
         }
       );
     } else {
@@ -241,6 +250,7 @@ function listenToMessages(bot) {
         {
           caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>✅ Enter the amount of RVN you want to withdraw !</b>`,
           parse_mode: "html",
+          reply_markup: mainButtons,
         }
       );
     }
