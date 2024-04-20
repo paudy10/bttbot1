@@ -350,7 +350,8 @@ function listenToMessages(bot) {
         );
         ctx.telegram.sendMessage(
           id,
-          `Hi ${user.name} \nYour Deposit Amount : ${amount} $ \n Profit Daily : ${daily}%`
+          `<b>Hi ${user.name} 👋</b> \n\n💵 Your Deposit Amount : <b>${amount} $</b> \n📈 Profit Daily : <b>${daily}%</b>`,
+          { parse_mode: "html" }
         );
       }
     }
