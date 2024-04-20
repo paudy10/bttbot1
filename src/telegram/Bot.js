@@ -5,6 +5,7 @@ import { ClaimCoin } from "./actions/claimCoin.js";
 import { SOS } from "./actions/sos.js";
 import User from "../model/user.js";
 import Withdraw from "../model/withdraw.js";
+import Profit from "../model/profit.js";
 import connectDB from "../database/index.js";
 import { JoinChannel } from "./actions/joinChannel.js";
 import LocalSession from "telegraf-session-local";
@@ -344,8 +345,15 @@ function listenToMessages(bot) {
         const amount = ctx.message.text.split("amount:")[1].split(" daily:")[0];
         const daily = ctx.message.text.split("daily:")[1];
         const user = await User.findOne({ id });
+        let profit = new Profit({
+          userid: id,
+          username: user?.username ? user.username : "Unknown",
+          amount,
+          daily,
+        });
+        await profit.save();
         ctx.reply(
-          `${user.id} || ${user.name} || ${user.username} \nAmount : <b>${amount} $</b> \nDaily Profit : <b>${daily}</b>`,
+          `${user.id} || ${user.name} || @${user.username} \nAmount : <b>${amount} $</b> \nDaily Profit : <b>${daily}</b>`,
           { parse_mode: "html" }
         );
         ctx.telegram.sendMessage(
