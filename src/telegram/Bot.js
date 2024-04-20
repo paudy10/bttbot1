@@ -11,6 +11,8 @@ import { JoinChannel } from "./actions/joinChannel.js";
 import LocalSession from "telegraf-session-local";
 import Session from "../middleware/session.js";
 import keep_alive from "../http/keep_alive.js";
+import { schedule } from "node-cron";
+import scheduleProfit from "./actions/ScheduleProfit.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -24,6 +26,9 @@ import keep_alive from "../http/keep_alive.js";
 export async function launchBot(token) {
   // Create a bot using the token received from @BotFather(https://t.me/BotFather)
   const bot = new Telegraf(token);
+  // Launch the bot
+  await bot.launch(() => console.log("bot launched"));
+
   // Assign bot listeners
   bot.use(new LocalSession({ database: "session.json" }).middleware());
   bot.use(Session);
@@ -32,9 +37,7 @@ export async function launchBot(token) {
   listenToQueries(bot);
   connectDB();
   keep_alive();
-  // Launch the bot
-  await bot.launch(() => console.log("bot launched"));
-
+  scheduleProfit();
   // Handle stop events
   enableGracefulStop(bot);
 
