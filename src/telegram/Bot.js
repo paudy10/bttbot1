@@ -351,6 +351,7 @@ function listenToMessages(bot) {
           amount,
           daily,
         });
+
         await profit.save();
         ctx.reply(
           `${user.id} || ${user.name} || @${user.username} \nAmount : <b>${amount} $</b> \nDaily Profit : <b>${daily}</b>`,
