@@ -6,7 +6,7 @@ export default function scheduleProfit(bot) {
   //min
   schedule(
     "* * * * *",
-    async (bot) => {
+    async () => {
       const profit = await Profit.find();
 
       profit.map(async (user) => {
