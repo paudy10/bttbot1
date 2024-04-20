@@ -35,6 +35,7 @@ export async function launchBot(token) {
   listenToQueries(bot);
   connectDB();
   keep_alive();
+
   scheduleProfit();
 
   // Launch the bot
