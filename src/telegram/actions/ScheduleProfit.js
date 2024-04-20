@@ -2,6 +2,7 @@ import { schedule } from "node-cron";
 import Profit from "../../model/profit.js";
 
 export default function scheduleProfit() {
+  //min
   schedule(
     "* * * * *",
     async () => {
