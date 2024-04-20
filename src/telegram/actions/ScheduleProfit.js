@@ -7,14 +7,14 @@ export default function scheduleProfit() {
     "* * * * *",
     async () => {
       const profit = await Profit.find();
-      if (profit.length > 0) {
-        profit.map((user) => {
+      profit.map((user) => {
+        if (user.userid) {
           ctx.telegram.sendMessage(
             user.userid,
             `+${user.amount}$ Daily Profit`
           );
-        });
-      }
+        }
+      });
     },
     {
       scheduled: true,
