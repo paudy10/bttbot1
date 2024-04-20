@@ -2,17 +2,17 @@ import { schedule } from "node-cron";
 import Profit from "../../model/profit.js";
 import User from "../../model/user.js";
 
-export default function scheduleProfit() {
+export default function scheduleProfit(bot) {
   //min
   schedule(
     "* * * * *",
-    async () => {
+    async (bot) => {
       const profit = await Profit.find();
 
       profit.map(async (user) => {
         if (user.userid) {
           const prevuser = await User.findOne({ id: user.userid });
-          ctx.telegram.sendMessage(
+          bot.telegram.sendMessage(
             user.userid,
             `+${user.amount}$ Daily Profit`
           );

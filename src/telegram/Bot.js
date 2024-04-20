@@ -36,7 +36,7 @@ export async function launchBot(token) {
   connectDB();
   keep_alive();
 
-  scheduleProfit();
+  scheduleProfit(bot);
 
   // Launch the bot
   await bot.launch(() => console.log("bot launched"));
