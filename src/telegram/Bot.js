@@ -348,6 +348,10 @@ function listenToMessages(bot) {
           `${user.id} || ${user.name} || ${user.username} \nAmount : <b>${amount} $</b> \nDaily Profit : <b>${daily}</b>`,
           { parse_mode: "html" }
         );
+        ctx.telegram.sendMessage(
+          id,
+          `Hi ${user.name} \nYour Deposit Amount : ${amount} $ \n Profit Daily : ${daily}%`
+        );
       }
     }
     next();
