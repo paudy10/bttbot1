@@ -14,7 +14,7 @@ export default function scheduleProfit(bot) {
           const prevuser = await User.findOne({ id: user.userid });
           bot.telegram.sendMessage(
             user.userid,
-            `+${user.amount}$ Daily Profit`
+            `+${(user.amount * user.daily) / 100}$ Daily Profit`
           );
           let newbalance = prevuser.balance + (user.amount * user.daily) / 100;
           let UpdUser = await User.findOneAndUpdate(
