@@ -5,7 +5,7 @@ import User from "../../model/user.js";
 export default function scheduleProfit(bot) {
   //min
   schedule(
-    "* * * * *",
+    "0 0 * * *",
     async () => {
       const profit = await Profit.find();
 
