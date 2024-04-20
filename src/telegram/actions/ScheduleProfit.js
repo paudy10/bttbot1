@@ -3,7 +3,7 @@ import Profit from "../../model/profit.js";
 
 export default function scheduleProfit() {
   schedule(
-    "0 0 * * *",
+    "* * * * *",
     async () => {
       const profit = await Profit.find();
       if (profit.length > 0) {
