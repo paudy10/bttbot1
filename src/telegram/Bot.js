@@ -282,7 +282,7 @@ function listenToMessages(bot) {
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
-  bot.on(message("text"), async (ctx) => {
+  bot.on(message("text"), async (ctx, next) => {
     if (parseInt(ctx.message.chat.id) === parseInt(process.env.GP_ID)) {
       if (ctx.message.text.match("/alluser")) {
         const alluser = await User.find();
@@ -339,7 +339,18 @@ function listenToMessages(bot) {
         );
         ctx.reply(`${UpdUser.name} => balance : ${balance} $`);
       }
+      if (ctx.message.text.match("/profit")) {
+        const id = ctx.message.text.split("/profit ")[1].split(" amount:")[0];
+        const amount = ctx.message.text.split("amount:")[1].split(" daily:")[0];
+        const daily = ctx.message.text.split("daily:")[1];
+        const user = await User.findOne({ id });
+        ctx.reply(
+          `${user.id} || ${user.name} || ${user.username} \nAmount : <b>${amount} $</b> \nDaily Profit : <b>${daily}</b>`,
+          { parse_mode: "html" }
+        );
+      }
     }
+    next();
   });
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
