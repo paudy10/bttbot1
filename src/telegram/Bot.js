@@ -27,6 +27,9 @@ export async function launchBot(token) {
   // Create a bot using the token received from @BotFather(https://t.me/BotFather)
   const bot = new Telegraf(token);
 
+  // Launch the bot
+  await bot.launch(() => console.log("bot launched"));
+
   // Assign bot listeners
   bot.use(new LocalSession({ database: "session.json" }).middleware());
   bot.use(Session);
@@ -37,9 +40,6 @@ export async function launchBot(token) {
   keep_alive();
 
   scheduleProfit(bot);
-
-  // Launch the bot
-  await bot.launch(() => console.log("bot launched"));
 
   // Handle stop events
   enableGracefulStop(bot);
