@@ -310,7 +310,7 @@ function listenToMessages(bot) {
           resize_keyboard: true,
           keyboard: [[{ text: "Cancel" }]],
         },
-        caption: `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 4% \n1️⃣ : 48 to 588 RVN daily profit 4% \n2️⃣ : 589 to 2888 RVN daily profit 8% \n3️⃣ : 2888 and above, daily profit of 12% \n\n📛 Minimum deposit 48 RVN \n⚠ Minimum withdrawal of 48 RVN \n⚠ Number of withdrawals once a day \nEnter the amount of RVN you want to Deposit !`,
+        caption: `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 4% \n1️⃣ : 48 to 588 RVN daily profit 4% \n2️⃣ : 589 to 2888 RVN daily profit 8% \n3️⃣ : 2888 and above, daily profit of 12% \n\n📛 Minimum deposit 48 RVN \n⚠ Minimum withdrawal of 48 RVN \n⚠ Number of withdrawals once a day \n\nEnter the amount of RVN you want to Deposit !`,
         parse_mode: "html",
       }
     );
