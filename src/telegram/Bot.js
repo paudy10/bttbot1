@@ -211,7 +211,7 @@ function listenToMessages(bot) {
 
     next();
   });
-  bot.hears("Claim Free RVN | 💰", async (ctx, next) => {
+  bot.hears("Claim Free RVN | 🎁", async (ctx, next) => {
     ctx.session.state = undefined;
     ctx.replyWithPhoto(
       "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
