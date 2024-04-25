@@ -244,7 +244,7 @@ function listenToMessages(bot) {
       "AgACAgQAAx0Cez-BrgACAb5mEOEFhAV_EtjcMyyafhQQfxvGMgACMMIxGzp9iFDTM6t8WJk8vgEAAwIAA3gAAzQE",
       {
         reply_markup: SOS(),
-        caption: `<b>Earn more from the robot ✨</b> \n⚜ This section is useful for people who have one or more pages full of audience in social software . \n🔰 You can earn money through : \n stories on <b>Instagram</b> \n making videos on <b>YouTube</b> \n advertising on <b>Telegram channels</b> \n tweeting on <b>Twitter</b> and <b>Facebook</b> etc. \ndepending on the number of views. \n\nTake a screenshot at the moment of the advertisement and 24 hours after it and send it to us ❤`,
+        caption: `<b>Earn more from the robot ✨</b> \n\n⚜ This section is useful for people who have one or more pages full of audience in social software . \n\n🔰 You can earn money through : \n  stories on <b>Instagram</b> \n  making videos on <b>YouTube</b> \n  advertising on <b>Telegram channels</b> \n  tweeting on <b>Twitter</b> and <b>Facebook</b> etc. \ndepending on the number of views. \n\nTake a screenshot at the moment of the advertisement and 24 hours after it and send it to us ❤\n`,
         parse_mode: "html",
       }
     );
