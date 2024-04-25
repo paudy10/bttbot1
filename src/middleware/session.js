@@ -10,8 +10,12 @@ export default function Session(ctx, next) {
         resize_keyboard: true,
         keyboard: [
           [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
-          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 🎁" }],
+          [
+            { text: "Support | ☎" },
+            { text: "Deposit | 💸" },
+            { text: "More income | 💰" },
+          ],
         ],
       },
     };
@@ -26,8 +30,12 @@ export default function Session(ctx, next) {
         resize_keyboard: true,
         keyboard: [
           [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
-          [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 🎁" }],
+          [
+            { text: "Support | ☎" },
+            { text: "Deposit | 💸" },
+            { text: "More income | 💰" },
+          ],
         ],
       };
       ctx.reply(
@@ -79,8 +87,12 @@ export default function Session(ctx, next) {
       resize_keyboard: true,
       keyboard: [
         [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-        [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
-        [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+        [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 🎁" }],
+        [
+          { text: "Support | ☎" },
+          { text: "Deposit | 💸" },
+          { text: "More income | 💰" },
+        ],
       ],
     };
     ctx.replyWithPhoto(
