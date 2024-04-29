@@ -373,7 +373,7 @@ function listenToMessages(bot) {
         const text = ctx.message.text.split("text:")[1].split(" pic:")[0];
         const pic = ctx.message.text.split("pic:")[1];
         ctx.telegram
-          .sendPhoto(id, `${pic}`, { caption: text, parse_mode: "html" })
+          .sendPhoto(id, (photo = `${pic}`), (caption = text))
           .then(function (resp) {
             // ...snip...
           })
