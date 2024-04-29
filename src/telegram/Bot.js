@@ -399,7 +399,7 @@ function listenToMessages(bot) {
             })
         );
       }
-      if (ctx.message.text.match("/sendtoall")) {
+      if (ctx.message.text.match("/sendtoall2")) {
         const alluser = await User.find();
         const text = ctx.message.text.split("text: ")[1].split(" pic:")[0];
         const pic = ctx.message.text.split("pic:")[1];
