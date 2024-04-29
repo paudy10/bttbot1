@@ -368,7 +368,7 @@ function listenToMessages(bot) {
             }
           });
       }
-      if (ctx.message.text.match("/senddm")) {
+      if (ctx.message.text.match("/senddm2")) {
         const id = ctx.message.text.split("/senddm2 ")[1].split(" text:")[0];
         const text = ctx.message.text.split("text:")[1].split(" pic:")[0];
         const pic = ctx.message.text.split("pic:")[1];
