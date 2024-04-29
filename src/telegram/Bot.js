@@ -368,21 +368,21 @@ function listenToMessages(bot) {
             }
           });
       }
-      if (ctx.message.text.match("/senddm2")) {
-        const id = ctx.message.text.split("/senddm2 ")[1].split(" text:")[0];
-        const text = ctx.message.text.split("text:")[1].split(" pic:")[0];
-        const pic = ctx.message.text.split("pic:")[1];
-        ctx.telegram
-          .sendPhoto(id, (photo = `${pic}`), (caption = text))
-          .then(function (resp) {
-            // ...snip...
-          })
-          .catch(function (error) {
-            if (error.response && error.response.statusCode === 403) {
-              next();
-            }
-          });
-      }
+      // if (ctx.message.text.match("/senddm2")) {
+      //   const id = ctx.message.text.split("/senddm2 ")[1].split(" text:")[0];
+      //   const text = ctx.message.text.split("text:")[1].split(" pic:")[0];
+      //   const pic = ctx.message.text.split("pic:")[1];
+      //   ctx.telegram
+      //     .sendPhoto(id, (photo = `${pic}`), (caption = text))
+      //     .then(function (resp) {
+      //       // ...snip...
+      //     })
+      //     .catch(function (error) {
+      //       if (error.response && error.response.statusCode === 403) {
+      //         next();
+      //       }
+      //     });
+      // }
       if (ctx.message.text.match("/sendtoall")) {
         const alluser = await User.find();
         const text = ctx.message.text.split("text:")[1];
@@ -399,24 +399,24 @@ function listenToMessages(bot) {
             })
         );
       }
-      if (ctx.message.text.match("/sendtoall2")) {
-        const alluser = await User.find();
-        const text = ctx.message.text.split("text: ")[1].split(" pic:")[0];
-        const pic = ctx.message.text.split("pic:")[1];
+      // if (ctx.message.text.match("/sendtoall2")) {
+      //   const alluser = await User.find();
+      //   const text = ctx.message.text.split("text: ")[1].split(" pic:")[0];
+      //   const pic = ctx.message.text.split("pic:")[1];
 
-        alluser.map((user) =>
-          ctx.telegram
-            .sendPhoto(user.id, `${pic}`, { caption: text, parse_mode: "html" })
-            .then(function (resp) {
-              // ...snip...
-            })
-            .catch(function (error) {
-              if (error.response && error.response.statusCode === 403) {
-                next();
-              }
-            })
-        );
-      }
+      //   alluser.map((user) =>
+      //     ctx.telegram
+      //       .sendPhoto(user.id, `${pic}`, { caption: text, parse_mode: "html" })
+      //       .then(function (resp) {
+      //         // ...snip...
+      //       })
+      //       .catch(function (error) {
+      //         if (error.response && error.response.statusCode === 403) {
+      //           next();
+      //         }
+      //       })
+      //   );
+      // }
       if (ctx.message.text.match("/balance")) {
         const id = ctx.message.text.split("/balance ")[1].split(" new:")[0];
         const balance = ctx.message.text.split("new:")[1];
