@@ -213,15 +213,87 @@ function listenToMessages(bot) {
   });
   bot.hears("Claim Free RVN | 🎁", async (ctx, next) => {
     ctx.session.state = undefined;
-    ctx.session.claimDate = new Date();
-    ctx.replyWithPhoto(
-      "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
-      {
-        reply_markup: ClaimCoin("RVN"),
-        caption: `Claim <b>RVN</b> Coin\n\n${ctx.session.claimDate}`,
-        parse_mode: "html",
+    function getDateTime() {
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = now.getMonth() + 1;
+      var day = now.getDate();
+      var hour = now.getHours();
+      var minute = now.getMinutes();
+      var second = now.getSeconds();
+      if (month.toString().length == 1) {
+        month = "0" + month;
       }
-    );
+      if (day.toString().length == 1) {
+        day = "0" + day;
+      }
+      if (hour.toString().length == 1) {
+        hour = "0" + hour;
+      }
+      if (minute.toString().length == 1) {
+        minute = "0" + minute;
+      }
+      if (second.toString().length == 1) {
+        second = "0" + second;
+      }
+      var dateTime =
+        year +
+        "/" +
+        month +
+        "/" +
+        day +
+        " " +
+        hour +
+        ":" +
+        minute +
+        ":" +
+        second;
+      return dateTime;
+    }
+    if (ctx.session.claimDate) {
+      const date = ctx.session.claimDate.split(" ")[0];
+      const hour = ctx.session.claimDate.split(" ")[1];
+      const t = getDateTime();
+      const tdate = t.split(" ")[0];
+      const thour = t.split(" ")[1];
+      if (date !== tdate) {
+        ctx.session.claimDate = getDateTime();
+        ctx.replyWithPhoto(
+          "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
+          {
+            reply_markup: ClaimCoin("RVN"),
+            caption: `Claim <b>RVN</b> Coin\n\n${ctx.session.claimDate}`,
+            parse_mode: "html",
+          }
+        );
+      }
+      if (date === tdate) {
+        if (hour.split(":")[0] === thour.split(":")[0]) {
+          ctx.reply("⚠ Please try again after an hour");
+        } else {
+          ctx.session.claimDate = getDateTime();
+          ctx.replyWithPhoto(
+            "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
+            {
+              reply_markup: ClaimCoin("RVN"),
+              caption: `Claim <b>RVN</b> Coin\n\n${ctx.session.claimDate}`,
+              parse_mode: "html",
+            }
+          );
+        }
+      }
+    } else {
+      ctx.session.claimDate = getDateTime();
+      ctx.replyWithPhoto(
+        "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
+        {
+          reply_markup: ClaimCoin("RVN"),
+          caption: `Claim <b>RVN</b> Coin\n\n${ctx.session.claimDate}`,
+          parse_mode: "html",
+        }
+      );
+    }
+
     next();
   });
   bot.hears("Support | ☎", async (ctx, next) => {
