@@ -213,11 +213,12 @@ function listenToMessages(bot) {
   });
   bot.hears("Claim Free RVN | 🎁", async (ctx, next) => {
     ctx.session.state = undefined;
+    ctx.session.claimDate = new Date();
     ctx.replyWithPhoto(
       "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
       {
         reply_markup: ClaimCoin("RVN"),
-        caption: `Claim <b>RVN</b> Coin`,
+        caption: `Claim <b>RVN</b> Coin\n\n${ctx.session.claimDate}`,
         parse_mode: "html",
       }
     );
