@@ -596,7 +596,7 @@ function listenToQueries(bot) {
         ctx.session.state = "EnterHash";
         ctx.reply(
           `<b>💵 Your amount to Deposit</b> : ${
-            ctx.session.Damount / 0.028
+            toString(ctx.session.Damount / 0.028).split(".")[0]
           } RVN ( ${
             ctx.session.Damount
           } $ ) \nSend to this wallet address : \n${
@@ -613,7 +613,7 @@ function listenToQueries(bot) {
         ctx.session.send = "Tether";
         ctx.reply(
           `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} $ (${
-            ctx.session.Damount * 0.028
+            toString(ctx.session.Damount / 0.028).split(".")[0]
           } RVN ) \nSend to this Tether Wallet Address : \n${
             process.env.TETHERWALLET
           }  \n\nEnter Transaction HASH  !`,
