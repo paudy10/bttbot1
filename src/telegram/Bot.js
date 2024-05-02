@@ -269,7 +269,13 @@ function listenToMessages(bot) {
       }
       if (date === tdate) {
         if (hour.split(":")[0] === thour.split(":")[0]) {
-          ctx.reply(`⚠ Please try again after an hour \n${hour}\n${thour}`);
+          ctx.reply(
+            `⚠ Please try again after ${
+              59 -
+              thour.split(":")[1].split(":")[0] -
+              hour.split(":")[1].split(":")[0]
+            }' Minute`
+          );
         } else {
           ctx.session.claimDate = getDateTime();
           ctx.replyWithPhoto(
