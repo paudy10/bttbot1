@@ -55,7 +55,7 @@ export default function Session(ctx, next) {
     ctx.session.Damount = parseInt(ctx.message.text);
     ctx.session.state = undefined;
     ctx.reply(
-      `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount}  \n\nSelect the Your currency for transfer  !`,
+      `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} $  \n\nSelect the Your currency for transfer  !`,
       {
         parse_mode: "html",
         reply_markup: {
