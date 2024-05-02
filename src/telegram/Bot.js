@@ -262,7 +262,7 @@ function listenToMessages(bot) {
           "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
           {
             reply_markup: ClaimCoin("RVN"),
-            caption: `Claim <b>RVN</b> Coin\n\n${ctx.session.claimDate}`,
+            caption: `Claim <b>RVN</b> Coin `,
             parse_mode: "html",
           }
         );
@@ -282,7 +282,7 @@ function listenToMessages(bot) {
             "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
             {
               reply_markup: ClaimCoin("RVN"),
-              caption: `Claim <b>RVN</b> Coin\n\n${ctx.session.claimDate}`,
+              caption: `Claim <b>RVN</b> Coin `,
               parse_mode: "html",
             }
           );
@@ -294,7 +294,7 @@ function listenToMessages(bot) {
         "AgACAgQAAx0Cez-BrgACAcZmEOEfx9_9agH9_12-HaEXhGlzgwACNMIxGzp9iFDq76KE88GtkAEAAwIAA3gAAzQE",
         {
           reply_markup: ClaimCoin("RVN"),
-          caption: `Claim <b>RVN</b> Coin\n\n${ctx.session.claimDate}`,
+          caption: `Claim <b>RVN</b> Coin `,
           parse_mode: "html",
         }
       );
