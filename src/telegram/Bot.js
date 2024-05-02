@@ -272,8 +272,8 @@ function listenToMessages(bot) {
           ctx.reply(
             `⚠ Please try again after ${
               59 -
-              thour.split(":")[1].split(":")[0] -
-              hour.split(":")[1].split(":")[0]
+              (thour.split(":")[1].split(":")[0] -
+                hour.split(":")[1].split(":")[0])
             }' Minute`
           );
         } else {
