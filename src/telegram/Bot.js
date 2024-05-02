@@ -118,7 +118,7 @@ function listenToCommands(bot) {
           [
             { text: "Bonus | 🎁" },
             { text: "Support | ☎" },
-            { text: "More income | 💰" },
+            { text: "More | 💰" },
           ],
         ],
       };
@@ -176,7 +176,7 @@ function listenToMessages(bot) {
           [
             { text: "Bonus | 🎁" },
             { text: "Support | ☎" },
-            { text: "More income | 💰" },
+            { text: "More | 💰" },
           ],
         ],
       },
@@ -316,7 +316,7 @@ function listenToMessages(bot) {
     next();
   });
 
-  bot.hears("More income | 💰", async (ctx, next) => {
+  bot.hears("More | 💰", async (ctx, next) => {
     ctx.session.state = undefined;
 
     ctx.replyWithPhoto(
@@ -343,7 +343,7 @@ function listenToMessages(bot) {
         [
           { text: "Bonus | 🎁" },
           { text: "Support | ☎" },
-          { text: "More income | 💰" },
+          { text: "More | 💰" },
         ],
       ],
     };
@@ -650,7 +650,7 @@ function listenToQueries(bot) {
             [
               { text: "Bonus | 🎁" },
               { text: "Support | ☎" },
-              { text: "More income | 💰" },
+              { text: "More | 💰" },
             ],
           ],
         };

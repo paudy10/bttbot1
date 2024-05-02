@@ -14,7 +14,7 @@ export default function Session(ctx, next) {
           [
             { text: "Bonus | 🎁" },
             { text: "Support | ☎" },
-            { text: "More income | 💰" },
+            { text: "More | 💰" },
           ],
         ],
       },
@@ -34,7 +34,7 @@ export default function Session(ctx, next) {
           [
             { text: "Bonus | 🎁" },
             { text: "Support | ☎" },
-            { text: "More income | 💰" },
+            { text: "More | 💰" },
           ],
         ],
       };
@@ -91,7 +91,7 @@ export default function Session(ctx, next) {
         [
           { text: "Bonus | 🎁" },
           { text: "Support | ☎" },
-          { text: "More income | 💰" },
+          { text: "More | 💰" },
         ],
       ],
     };
