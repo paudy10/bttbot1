@@ -114,10 +114,10 @@ function listenToCommands(bot) {
         resize_keyboard: true,
         keyboard: [
           [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 🎁" }],
+          [{ text: "Withdraw | 💵" }, { text: "Deposit | 💸" }],
           [
+            { text: "Bonus | 🎁" },
             { text: "Support | ☎" },
-            { text: "Deposit | 💸" },
             { text: "More income | 💰" },
           ],
         ],
@@ -172,10 +172,10 @@ function listenToMessages(bot) {
         resize_keyboard: true,
         keyboard: [
           [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-          [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 🎁" }],
+          [{ text: "Withdraw | 💵" }, { text: "Deposit | 💸" }],
           [
+            { text: "Bonus | 🎁" },
             { text: "Support | ☎" },
-            { text: "Deposit | 💸" },
             { text: "More income | 💰" },
           ],
         ],
@@ -211,7 +211,7 @@ function listenToMessages(bot) {
 
     next();
   });
-  bot.hears("Claim Free RVN | 🎁", async (ctx, next) => {
+  bot.hears("Bonus | 🎁", async (ctx, next) => {
     ctx.session.state = undefined;
     function getDateTime() {
       var now = new Date();
@@ -339,10 +339,10 @@ function listenToMessages(bot) {
       resize_keyboard: true,
       keyboard: [
         [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-        [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 🎁" }],
+        [{ text: "Withdraw | 💵" }, { text: "Deposit | 💸" }],
         [
+          { text: "Bonus | 🎁" },
           { text: "Support | ☎" },
-          { text: "Deposit | 💸" },
           { text: "More income | 💰" },
         ],
       ],
@@ -636,8 +636,12 @@ function listenToQueries(bot) {
           resize_keyboard: true,
           keyboard: [
             [{ text: "Account | 📋" }, { text: "Referral | 👥" }],
-            [{ text: "Withdraw | 💵" }, { text: "Claim Free RVN | 💰" }],
-            [{ text: "Support | ☎" }, { text: "Deposit | 💸" }],
+            [{ text: "Withdraw | 💵" }, { text: "Deposit | 💸" }],
+            [
+              { text: "Bonus | 🎁" },
+              { text: "Support | ☎" },
+              { text: "More income | 💰" },
+            ],
           ],
         };
         ctx.replyWithPhoto(
