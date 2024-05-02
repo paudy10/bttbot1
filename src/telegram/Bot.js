@@ -389,7 +389,7 @@ function listenToMessages(bot) {
           resize_keyboard: true,
           keyboard: [[{ text: "Cancel" }]],
         },
-        caption: `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 4% \n1️⃣ : 48 to 588 RVN daily profit 4% \n2️⃣ : 589 to 2888 RVN daily profit 8% \n3️⃣ : 2888 and above, daily profit of 12% \n\n📛 Minimum deposit 48 RVN \n⚠ Minimum withdrawal of 48 RVN \n⚠ Number of withdrawals once a day \n\nEnter the amount of RVN you want to Deposit !`,
+        caption: `⚜ Here you can get daily profit by investing! \n\n🔰 Daily profit starting from 2% \n1️⃣ : 9 to 499 $ daily profit 2% \n2️⃣ : 499 to 999 $ daily profit 2.4% \n3️⃣ : 999 to 1999 $ daily profit 3.1% \n4️⃣ : 1999 and above, daily profit of 3.6% \n\n📛 Minimum deposit 320 RVN ( 9 $ )  \n⚠ Minimum withdrawal of 50 RVN \n⚠ Number of withdrawals once a day \n\nEnter the amount of $Dollar you want to Deposit !`,
         parse_mode: "html",
       }
     );
@@ -595,7 +595,13 @@ function listenToQueries(bot) {
         ctx.session.send = "Raven";
         ctx.session.state = "EnterHash";
         ctx.reply(
-          `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \nSend to this wallet address : \n${process.env.RVNWALLET}  \n\nEnter Transaction HASH  !`,
+          `<b>💵 Your amount to Deposit</b> : ${
+            ctx.session.Damount / 0.028
+          } RVN ( ${
+            ctx.session.Damount
+          } $ ) \nSend to this wallet address : \n${
+            process.env.RVNWALLET
+          }  \n\nEnter Transaction HASH  !`,
           { parse_mode: "html" }
         );
       }
@@ -606,7 +612,11 @@ function listenToQueries(bot) {
         ctx.session.state = "EnterHash";
         ctx.session.send = "Tether";
         ctx.reply(
-          `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} \nSend to this Tether Wallet Address : \n${process.env.TETHERWALLET}  \n\nEnter Transaction HASH  !`,
+          `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} $ (${
+            ctx.session.Damount * 0.028
+          } RVN ) \nSend to this Tether Wallet Address : \n${
+            process.env.TETHERWALLET
+          }  \n\nEnter Transaction HASH  !`,
           { parse_mode: "html" }
         );
       }
