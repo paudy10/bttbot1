@@ -1,6 +1,7 @@
 import { launchBot } from "../telegram/Bot.js";
 import { launchApi, MESSAGE_PATH } from "../http/Api.js";
-
+import "../../db.json";
+import { BOT_TOKEN } from "../../db.js";
 /**
  * This is the entry point of our app
  * Call this method inside index.js to launch the bot and the api
@@ -8,7 +9,7 @@ import { launchApi, MESSAGE_PATH } from "../http/Api.js";
  */
 export function launchApp() {
   // Read token from .env file and use it to launch telegram bot
-  const bot = launchBot(process.env.BOT_TOKEN);
+  const bot = launchBot(BOT_TOKEN);
   //
   // Launch api
   const api = launchApi();

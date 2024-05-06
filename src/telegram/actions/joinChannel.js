@@ -1,3 +1,5 @@
+import { CHANNEL_LINK, STARTBOT } from "../../../db";
+
 export const JoinChannel = (id) => {
   return {
     resize_keyboard: true,
@@ -5,13 +7,13 @@ export const JoinChannel = (id) => {
       [
         {
           text: "RVN Channel",
-          url: process.env.CHANNEL_LINK,
+          url: CHANNEL_LINK,
         },
       ],
       [
         {
           text: "✅ | CHECK",
-          url: `${process.env.STARTBOT}${id ? `=${id}` : ""}`,
+          url: `${STARTBOT}${id ? `=${id}` : ""}`,
         },
       ],
     ],

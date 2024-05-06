@@ -1,5 +1,6 @@
 import { stat } from "fs";
 import { ConfirmWithdraw } from "../telegram/actions/confirmWithdraw.js";
+import { GP_ID, MIN_WITHDRAW } from "../../db.js";
 
 export default function Session(ctx, next) {
   if (!ctx.session?.state) return next();
@@ -25,7 +26,7 @@ export default function Session(ctx, next) {
   if (state === "EnterWithdrawAmount" && ctx.message.text !== "Cancel") {
     ctx.session.amount = parseInt(ctx.message.text);
 
-    if (ctx.session.amount < process.env.MIN_WITHDRAW) {
+    if (ctx.session.amount < MIN_WITHDRAW) {
       const mainButtons = {
         resize_keyboard: true,
         keyboard: [
@@ -39,7 +40,7 @@ export default function Session(ctx, next) {
         ],
       };
       ctx.reply(
-        `<b>💵 Your amount</b> : ${ctx.session.amount} \n<b>⚠ Minimum amount to withdraw</b> : ${process.env.MIN_WITHDRAW}`,
+        `<b>💵 Your amount</b> : ${ctx.session.amount} \n<b>⚠ Minimum amount to withdraw</b> : ${MIN_WITHDRAW}`,
         { parse_mode: "html", reply_markup: mainButtons }
       );
       ctx.session.state = undefined;
@@ -104,7 +105,7 @@ export default function Session(ctx, next) {
       }
     );
     ctx.telegram.sendMessage(
-      process.env.GP_ID,
+      GP_ID,
       `New Deposit ! \n----------\nAmount to Deposit : ${
         ctx.session.Damount
       } \nHash address : ${ctx.session.hash}\n----------\nUser ID : ${

@@ -1,3 +1,5 @@
+import { SUPPORTER } from "../../../db";
+
 export const SOS = () => {
   return {
     resize_keyboard: true,
@@ -5,7 +7,7 @@ export const SOS = () => {
       [
         {
           text: "📞 | Support",
-          url: process.env.SUPPORTER,
+          url: SUPPORTER,
         },
       ],
     ],

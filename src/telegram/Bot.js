@@ -13,6 +13,16 @@ import Session from "../middleware/session.js";
 import keep_alive from "../http/keep_alive.js";
 import { schedule } from "node-cron";
 import scheduleProfit from "./actions/ScheduleProfit.js";
+import {
+  CHANNEL_ID,
+  CLAIM_PRIZE,
+  GP_ID,
+  MIN_WITHDRAW,
+  REF_PRIZE,
+  RVN,
+  RVNWALLET,
+  TETHERWALLET,
+} from "../../db.js";
 
 /**
  * Creates and launches Telegram bot, and assigns all the required listeners
@@ -61,7 +71,7 @@ function listenToCommands(bot) {
   // Register a listener for the /start command, and reply with a message whenever it's used
   bot.start(async (ctx, next) => {
     const chat = await ctx.telegram.getChatMember(
-      process.env.CHANNEL_ID,
+      CHANNEL_ID,
       ctx.message.from.id
     );
     const starter = async (ctx) => {
@@ -75,7 +85,7 @@ function listenToCommands(bot) {
             id: ctx.message.text.split("/start ")[1],
           });
           parentUsername = prnt.username ? prnt.username : prnt.name;
-          let balance = prnt.balance + parseInt(process.env.REF_PRIZE);
+          let balance = prnt.balance + parseInt(REF_PRIZE);
           let prnt1 = await User.findOneAndUpdate(
             { id: ctx.message.text.split("/start ")[1] },
             { balance },
@@ -104,7 +114,7 @@ function listenToCommands(bot) {
         await user1.save();
 
         ctx.telegram.sendMessage(
-          process.env.GP_ID,
+          GP_ID,
           `Join New User ! \n${userTel.id} || ${userTel.first_name} || @${userTel?.username} \nInvited by : @${parentUsername}`
         );
       } else {
@@ -349,11 +359,11 @@ function listenToMessages(bot) {
     };
     let user = await User.findOne({ id: userTel.id });
     // ctx.reply("Withdraw", mainButtons);
-    if (user.balance < process.env.MIN_WITHDRAW) {
+    if (user.balance < MIN_WITHDRAW) {
       ctx.replyWithPhoto(
         "AgACAgQAAx0Cez-BrgACAdJmEOEyYCVwwEtjpjVsxPFCJuEwIAACOsIxGzp9iFATyttAilRylQEAAwIAA3gAAzQE",
         {
-          caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
+          caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${MIN_WITHDRAW} \n<b>❌ You Can't Withdraw !</b>`,
           parse_mode: "html",
           reply_markup: mainButton,
         }
@@ -363,7 +373,7 @@ function listenToMessages(bot) {
       ctx.replyWithPhoto(
         "AgACAgQAAx0Cez-BrgACAc5mEOEtZaK_leK54gsaqDZpuRxbXwACOMIxGzp9iFCCrItbJ2ID2QEAAwIAA3gAAzQE",
         {
-          caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${process.env.MIN_WITHDRAW} \n<b>✅ Enter the amount of RVN you want to withdraw !</b>`,
+          caption: `<b>🔰 Your Balance</b> : ${user.balance} \n<b>❕ Minimum RVN to Withdraw</b> : ${MIN_WITHDRAW} \n<b>✅ Enter the amount of RVN you want to withdraw !</b>`,
           parse_mode: "html",
           reply_markup: {
             resize_keyboard: true,
@@ -399,7 +409,7 @@ function listenToMessages(bot) {
 
   // Listen to messages with the type 'sticker' and reply whenever you receive them
   bot.on(message("text"), async (ctx, next) => {
-    if (parseInt(ctx.message.chat.id) === parseInt(process.env.GP_ID)) {
+    if (parseInt(ctx.message.chat.id) === parseInt(GP_ID)) {
       if (ctx.message.text.match("/alluser")) {
         const alluser = await User.find();
         ctx.reply(
@@ -538,7 +548,7 @@ function listenToMessages(bot) {
   //   ctx.reply("I like your sticker! 🔥");
   // });
   bot.on(message("photo"), async (ctx) => {
-    if (parseInt(ctx.message.chat.id) === parseInt(process.env.GP_ID)) {
+    if (parseInt(ctx.message.chat.id) === parseInt(GP_ID)) {
       await ctx.telegram
         .sendChatAction(ctx.message.chat.id, "upload_photo")
         .then()
@@ -571,7 +581,7 @@ function listenToQueries(bot) {
         let user = await User.findOne({
           id: id,
         });
-        let balance = user.balance + parseFloat(process.env.CLAIM_PRIZE);
+        let balance = user.balance + parseFloat(CLAIM_PRIZE);
         let UpdUser = await User.findOneAndUpdate(
           { id: id },
           { balance },
@@ -596,12 +606,10 @@ function listenToQueries(bot) {
         ctx.session.state = "EnterHash";
         ctx.reply(
           `<b>💵 Your amount to Deposit</b> : ${
-            parseInt(ctx.session.Damount / process.env.RVN) + 1
+            parseInt(ctx.session.Damount / RVN) + 1
           } RVN ( ${
             ctx.session.Damount
-          } $ ) \nSend to this wallet address : \n${
-            process.env.RVNWALLET
-          }  \n\nEnter Transaction HASH  !`,
+          } $ ) \nSend to this wallet address : \n${RVNWALLET}  \n\nEnter Transaction HASH  !`,
           { parse_mode: "html" }
         );
       }
@@ -613,10 +621,8 @@ function listenToQueries(bot) {
         ctx.session.send = "Tether";
         ctx.reply(
           `<b>💵 Your amount to Deposit</b> : ${ctx.session.Damount} $ (${
-            parseInt(ctx.session.Damount / process.env.RVN) + 1
-          } RVN ) \nSend to this Tether Wallet Address : \n${
-            process.env.TETHERWALLET
-          }  \n\nEnter Transaction HASH  !`,
+            parseInt(ctx.session.Damount / RVN) + 1
+          } RVN ) \nSend to this Tether Wallet Address : \n${TETHERWALLET}  \n\nEnter Transaction HASH  !`,
           { parse_mode: "html" }
         );
       }
@@ -626,7 +632,7 @@ function listenToQueries(bot) {
         let chatID = ctx.update.callback_query.message.chat.id;
         ctx.telegram.deleteMessage(chatID, messageID);
         ctx.telegram.sendMessage(
-          process.env.GP_ID,
+          GP_ID,
           `New Withdraw ! \n----------\nAmount to withdraw : ${
             ctx.session.amount
           } \nWallet address : ${ctx.session.wallet}\n----------\nUser ID : ${
